@@ -21,8 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.tsx\"",
-    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.tsx\" --fix"
+    "lint": "eslint \"src/**/*.tsx\" \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.tsx\" \"src/**/*.ts\" --fix"
   },
   "eslintConfig": {
     "extends": [
