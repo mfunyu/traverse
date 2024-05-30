@@ -4,11 +4,9 @@
 This document outlines the design and implementation details for the Road Trip Planning App. The app allows users to create and manage an itinerary for their road trips, visualizing the route on a map and storing the data locally.
 
 ## ⭐️ Goals
-- Develop a user-friendly interface for planning road trips.
-- Enable users to visualize their itinerary on a map.
-- Responsive designe for both PC / smartphone users.
-- Ensure data persistence between sessions using Local Storage.
-- Provide additional functionalities such as destination suggestions and itinerary sharing.
+- Develop a user-friendly / intuitive interface for planning road trips.
+- Create a extendable program enabling to add features.
+- Responsive design for both PC / smartphone users.
 
 ## Feachers
 ### Plan your trip
@@ -27,7 +25,6 @@ This document outlines the design and implementation details for the Road Trip P
 - Edit destinations : modify attributes of a destination (cannot modify destination itself)
   - open popup to edit
 - Reorder destinations : change order of destinations on the list
-
 
 ### View your trip (map)
 
@@ -55,7 +52,7 @@ This document outlines the design and implementation details for the Road Trip P
 | 4  | Modification and Deletion                    | Implement functionality to edit and delete destinations. Use modals for editing destinations.                    |
 | 5  | Local Storage                                | Add functionality to save and load the itinerary from Local Storage.                                            |
 | 6  | Styling and Responsiveness                   | Learn Saas, Apply CSS styles to make the app visually appealing and responsive.                                              |
-| (7) | BONUS features                                | Integrate API / shareable link for itienrary                                               |
+| (7) | BONUS features                                | Integrate API / shareable link for itinerary                                               |
 | (8) | Testing                                       | Write unit tests for key components. Test functionality and responsiveness across different devices.            |
 | 9  | Bug Fixes and Documentation                   | Address any bugs or issues identified during testing. Prepare the README file and create a demo video or screenshots. |
 | 10 | Final Review and Submission                  | Review the project to ensure all requirements are met. Submit the project by the deadline.                        |
