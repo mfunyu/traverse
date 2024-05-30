@@ -43,3 +43,19 @@ This document outlines the design and implementation details for the Road Trip P
 | Furkot             | [Furkot](https://trips.furkot.com/)          | ![Screenshot_from_2024-05-30_11-12-51](/uploads/54f233f29e3e5e52c46457f9b1d35947/Screenshot_from_2024-05-30_11-12-51.png) |
 | MyScenicDrives     | [MyScenicDrives](https://www.myscenicdrives.com/) | ![Screenshot_from_2024-05-30_11-05-34](/uploads/0e721c16580e87699f4d5980f45e3a91/Screenshot_from_2024-05-30_11-05-34.png) |
 | Travelmath         | [Travelmath](https://www.travelmath.com/)    | Cannot add multiple destinations |
+
+
+## Roadmap
+
+| Day    | Task                                          | Details                                                                                                     |
+|--------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| 1  | Project Setup                                | Create a plan, Initialize project, Install necessary dependencies, Set up GitLab repository. |
+| 2  | Add Destination Form                         | Implement the `AddDestinationForm` component. Set up state management for storing destinations.                |
+| 3  | Itinerary Display                            | Create the `Itinerary` component to display the list of destinations. Learn & integrate Leaflet.js for map visualization. |
+| 4  | Modification and Deletion                    | Implement functionality to edit and delete destinations. Use modals for editing destinations.                    |
+| 5  | Local Storage                                | Add functionality to save and load the itinerary from Local Storage.                                            |
+| 6  | Styling and Responsiveness                   | Learn Saas, Apply CSS styles to make the app visually appealing and responsive.                                              |
+| (7) | BONUS features                                | Integrate API / shareable link for itienrary                                               |
+| (8) | Testing                                       | Write unit tests for key components. Test functionality and responsiveness across different devices.            |
+| 9  | Bug Fixes and Documentation                   | Address any bugs or issues identified during testing. Prepare the README file and create a demo video or screenshots. |
+| 10 | Final Review and Submission                  | Review the project to ensure all requirements are met. Submit the project by the deadline.                        |
