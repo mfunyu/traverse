@@ -1,6 +1,7 @@
 {
   "name": "road-trip-app",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -13,14 +14,15 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.tsx\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.tsx\" --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.11.0"
   }
 }
