@@ -10,13 +10,35 @@ This document outlines the design and implementation details for the Road Trip P
 - Ensure data persistence between sessions using Local Storage.
 - Provide additional functionalities such as destination suggestions and itinerary sharing.
 
+## Feachers
+### Plan your trip
+  | Feature            | Attribute Name    | Required/Optional | Default Value | Description                                          |
+  |--------------------|-------------------|-------------------|---------------|------------------------------------------------------|
+  | Add Destination    | Destination       | Required          | -             | The name of the destination.                         |
+  |                    | Name              | Optional          | ${Destination} | The name of the destination.                         |
+  |                    | Arrival Date      | Optional          | None          | The date of arrival at the destination.              |
+  |                    | Number of Days    | Optional          | 1             | The number of days to stay at the destination.       |
+  |                    | Notes             | Optional          | empty         | Additional notes or comments about the destination.  |
+
+### View your trip (list)
+> display planned trip
+- Remove destinations : delete selected destinations
+  - press [x] to remove
+- Edit destinations : modify attributes of a destination (cannot modify destination itself)
+  - open popup to edit
+- Reorder destinations : change order of destinations on the list
+
+
+### View your trip (map)
+
+
 ## References
 
 ### Websites
 
 | Website            | URL                                          | Details                                                                                                         |
 |--------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| Roadtrippers       | [Roadtrippers](https://roadtrippers.com/)    | ![Screenshot_from_2024-05-30_11-15-41](/uploads/35c98fddb4335058f51b374c2ff0605f/Screenshot_from_2024-05-30_11-15-41.png) |
+| Roadtrippers       | [Roadtrippers](https://roadtrippers.com/)    | ![Screenshot_from_2024-05-30_11-15-41](/uploads/35c98fddb4335058f51b374c2ff0605f/Screenshot_from_2024-05-30_11-15-41.png) ![Screenshot_from_2024-05-30_12-45-15](/uploads/88161464c828b2577cb9aff6ccd47960/Screenshot_from_2024-05-30_12-45-15.png) |
 | Google My Maps     | [Google My Maps](https://www.google.com/mymaps) | ![Screenshot_from_2024-05-30_11-17-20](/uploads/34b64bf8b89c6aee8c9632ae991fbdda/Screenshot_from_2024-05-30_11-17-20.png)   |
 | Furkot             | [Furkot](https://trips.furkot.com/)          | ![Screenshot_from_2024-05-30_11-12-51](/uploads/54f233f29e3e5e52c46457f9b1d35947/Screenshot_from_2024-05-30_11-12-51.png) |
 | MyScenicDrives     | [MyScenicDrives](https://www.myscenicdrives.com/) | ![Screenshot_from_2024-05-30_11-05-34](/uploads/0e721c16580e87699f4d5980f45e3a91/Screenshot_from_2024-05-30_11-05-34.png) |
