@@ -1,4 +1,4 @@
-# Design Document: Road Trip Planning App
+# [Design Document]: Traverse (road trip planning App
 
 ## 🗺️ Overview
 This document outlines the design and implementation details for the Road Trip Planning App. The app allows users to create and manage an itinerary for their road trips, visualizing the route on a map and storing the data locally.
@@ -8,7 +8,7 @@ This document outlines the design and implementation details for the Road Trip P
 - Create a extendable program enabling to add features.
 - Responsive design for both PC / smartphone users.
 
-## Feachers
+## Features
 ### Plan your trip
   | Feature            | Attribute Name    | Required/Optional | Default Value | Description                                          |
   |--------------------|-------------------|-------------------|---------------|------------------------------------------------------|
