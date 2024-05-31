@@ -1,0 +1,48 @@
+/* src/NavigationBar.css */
+
+/* Color Palette */
+:root {
+  --primary-color: #ae280a; /* Dark Red */
+  --secondary-color: #e1b67a; /* Light Brown */
+  --accent-color: #059e85; /* Teal */
+  --background-color: #d8d7d7; /* Light Gray */
+  --light-background-color: #f5f5f5; /* Very Light Gray */
+  --button-hover-color: #73b1cf; /* Light Blue */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--light-background-color);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 10px 20px;
+}
+
+.navbar .brand {
+  color: var(--light-background-color);
+  font-size: 24px;
+}
+
+.navbar .nav-buttons {
+  display: flex;
+}
+
+.navbar .nav-buttons button {
+  background-color: var(--secondary-color);
+  color: var(--light-background-color);
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navbar .nav-buttons button:hover {
+  background-color: var(--button-hover-color);
+}
