@@ -1,15 +1,15 @@
 import React from "react";
 import "../styles/components/Planner.scss";
-import PlannerItem from "./PlannerItem";
+import PlannerCard from "./PlannerCard";
 
 function PlannerLists () {
   return (
     <div className="lists">
-      <PlannerItem />
-      <PlannerItem />
-      <PlannerItem />
-      <PlannerItem />
-      <PlannerItem />
+      <PlannerCard />
+      <PlannerCard />
+      <PlannerCard />
+      <PlannerCard />
+      <PlannerCard />
     </div>
   );
 }
