@@ -2,7 +2,6 @@ import React from "react";
 import NavigationBar from "./components/NavigationBar";
 import Planner from "./components/Planner";
 import "./styles/App.scss";
-import "./styles/Color.scss";
 
 function App() {
   return (

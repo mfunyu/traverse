@@ -1,37 +1,37 @@
-/* src/NavigationBar.css */
+@use 'base';
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--primary-color);
+  background-color: base.$primary-color;
   padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 1;
-}
 
-.navbar .brand {
-  color: var(--light-background-color);
-  font-size: 28px;
-  font-weight: bold;
-  font-family: cursive;
-}
+  .brand {
+    color: base.$light-background-color;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: cursive;
+  }
 
-.navbar .nav-buttons {
-  display: flex;
-}
+  .nav-buttons {
+    display: flex;
 
-.navbar .nav-buttons button {
-  background-color: var(--secondary-color);
-  color: var(--light-background-color);
-  border: none;
-  padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    button {
+      background-color: base.$secondary-color;
+      color: base.$light-background-color;
+      border: none;
+      padding: 10px 20px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
 
-.navbar .nav-buttons button:hover {
-  background-color: var(--button-hover-color);
+      &:hover {
+        background-color: base.$button-hover-color;
+      }
+    }
+  }
 }
