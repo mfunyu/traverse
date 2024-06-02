@@ -1,12 +1,12 @@
 import React from "react";
 import "../styles/components/Planner.scss";
-import PlannerCard from "./PlannerCard";
+import PlannerCard, { PlannerStayCard } from "./PlannerCard";
 
 function PlannerLists () {
   return (
     <div className="lists">
       <PlannerCard />
-      <PlannerCard />
+      <PlannerStayCard />
       <PlannerCard />
       <PlannerCard />
       <PlannerCard />
