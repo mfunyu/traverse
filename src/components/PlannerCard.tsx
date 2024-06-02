@@ -13,10 +13,11 @@ function PlannerItem () {
   );
 }
 
-
 function PlannerCard () {
+  const isStay = true;
+  const cardType = isStay ? "card-stay" : "card";
   return (
-    <div className="card">
+    <div className={cardType}>
       <h3>Wednesday</h3>
       <PlannerItem />
       <PlannerItem />
