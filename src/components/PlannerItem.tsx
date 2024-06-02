@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/PlannerItem.scss";
+import "../styles/components/PlannerItem.scss";
 
 function PlannerItem () {
   return (
