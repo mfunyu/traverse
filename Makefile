@@ -12,4 +12,4 @@ run		:
 
 .PHONY	: setup
 setup	:
-	cp .github/hooks/pre-commit .git/hooks/pre-commit
+	cp .gitlab/hooks/pre-commit .git/hooks/pre-commit
