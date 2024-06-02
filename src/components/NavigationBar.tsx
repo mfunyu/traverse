@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/NavigationBar.css";
 
-const NavigationBar = () => {
+function NavigationBar () {
   return (
     <div className="navbar">
       <div className="brand">Traverse</div>
@@ -10,6 +10,6 @@ const NavigationBar = () => {
       </div>
     </div>
   );
-};
+}
 
 export default NavigationBar;

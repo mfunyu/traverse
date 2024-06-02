@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Planner.css";
 
-const PlannerItem = () => {
+function PlannerItem () {
   return (
     <div className="item">
       <div className="item-header">
@@ -14,9 +14,9 @@ const PlannerItem = () => {
       </div>
     </div>
   );
-};
+}
 
-const PlannerLists = () => {
+function PlannerLists () {
   return (
     <div className="lists">
       <PlannerItem />
@@ -26,17 +26,17 @@ const PlannerLists = () => {
       <PlannerItem />
     </div>
   );
-};
+}
 
-const PlannerHeader = () => {
+function PlannerHeader () {
   return (
     <div className="header">
       <h2>Trip to Paris</h2>
     </div>
   );
-};
+}
 
-const Planner = () => {
+function Planner () {
   return (
     <div className="planner">
       <div className="contents">
@@ -45,6 +45,6 @@ const Planner = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Planner;
