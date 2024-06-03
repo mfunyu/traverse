@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+import "leaflet-geosearch/dist/geosearch.css";
 import { useMap } from "react-leaflet";
 import * as L from "leaflet";
 
@@ -8,9 +8,10 @@ const SearchField = () => {
   const provider = new OpenStreetMapProvider();
 
   const options = {
-    notFoundMessage: "Sorry, that address could not be found.",
+    notFoundMessage: "No results found",
     provider: provider,
-    // style: "bar",
+    style: "bar",
+    showPopup: true,
   };
 
   const searchControl = new GeoSearchControl(options);
