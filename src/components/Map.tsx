@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import "../styles/components/Map.scss";
 import "leaflet/dist/leaflet.css";
+import SearchField from "./SearchField";
 
 function Map() {
   return (
@@ -15,6 +16,7 @@ function Map() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <ZoomControl position="bottomright" />
+        <SearchField />
       </MapContainer>
     </div>
   );
