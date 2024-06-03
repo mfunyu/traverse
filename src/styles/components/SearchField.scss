@@ -1,0 +1,8 @@
+/* custom.css */
+
+/* Position the GeoSearch control to bottom right */
+.leaflet-geosearch-bar {
+  position: absolute;
+  top: 50px;
+  right: 50%;
+}

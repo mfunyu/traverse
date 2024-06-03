@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import "../styles/components/Map.scss";
 import "leaflet/dist/leaflet.css";
 import SearchField from "./SearchField";
+import "../styles/components/SearchField.scss";
 
 function Map() {
   return (
