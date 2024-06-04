@@ -1,8 +1,9 @@
-/* custom.css */
+$bar-size: calc((100% - 420px) * 0.5);
 
-/* Position the GeoSearch control to bottom right */
 .leaflet-geosearch-bar {
   position: absolute;
   top: 50px;
-  right: 50%;
+  right: calc((100% - 420px - $bar-size) / 2);
+  padding: 3em;
+  width: $bar-size;
 }
