@@ -13,7 +13,6 @@ FAIL="${THICK}[ ${RED}FAIL${RESET}${THICK} ]${RESET}"
 PASS="${THICK}[ ${GREEN}PASS${RESET}${THICK} ]${RESET}"
 
 
-cd server
 npm run lint
 if [ "$?" != 0 ]; then
 	printf "$FAIL Linter check failed, commit not allowed.\n"
