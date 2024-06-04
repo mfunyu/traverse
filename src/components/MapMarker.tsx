@@ -1,6 +1,16 @@
 import { Marker, Popup } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import "../styles/components/MapMarker.scss";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "/images/marker-icon-2x.png",
+  iconUrl: "/images/marker-icon.png",
+  shadowUrl: "/images/marker-shadow.png",
+});
 
 function MarkerInRoute() {
 
@@ -36,7 +46,7 @@ function MapMarker() {
   const position: LatLngTuple = [51.505, -0.09];
 
   return (
-    <Marker position={position}>
+    <Marker position={position} >
       <Popup>
         <MarkerInRoute />
       </Popup>
