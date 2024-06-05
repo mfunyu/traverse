@@ -13,37 +13,51 @@ $border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.4);
 
   .modal-content {
-    background-color: #fefefe;
+    background-color: base.$secondary-color;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 30%;
-    min-width: 300px;
+    min-width: 350px;
     max-width: 700px;
     border-radius: $border-radius;
 
     .close-button {
       color: #aaa;
       float: right;
-      font-size: 28px;
       font-weight: bold;
+      font-size: 35px;
 
       &:hover,
       &:focus {
-        color: black;
+        color: base.$accent-color;
         text-decoration: none;
         cursor: pointer;
       }
     }
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1em;
+      padding: 0 1em ;
+      color: base.$text-color;
 
-    .modal-input {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: none;
+      .label {
+        margin: 0 0.5em 0.5em 0.5em;
+        text-align: left;
+      }
+
+      input {
+        padding: 12px 20px;
+        display: inline-block;
+        border: none;
         border-bottom: 1px solid #ccc;
-      box-sizing: border-box;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: none;
+          border-bottom: 1px solid base.$accent-color;
+        }
+      }
     }
 
     .modal-footer {
