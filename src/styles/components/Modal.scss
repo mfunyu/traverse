@@ -1,4 +1,6 @@
-// DestinationModal.scss
+@use '../base';
+
+$border-radius: 4px;
 .modal {
   display: block;
   position: fixed;
@@ -16,6 +18,9 @@
     padding: 20px;
     border: 1px solid #888;
     width: 30%;
+    min-width: 300px;
+    max-width: 700px;
+    border-radius: $border-radius;
 
     .close-button {
       color: #aaa;
@@ -36,23 +41,27 @@
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border: none;
+        border-bottom: 1px solid #ccc;
       box-sizing: border-box;
     }
 
-    .modal-button {
-      background-color: #4caf50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100%;
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
 
-      &:hover {
-        background-color: #45a049;
+      .modal-button {
+        background-color: base.$primary-color;
+        color: base.$secondary-color;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken(base.$primary-color, 10%);
+        }
       }
     }
   }
