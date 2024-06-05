@@ -2,11 +2,15 @@ import { Marker, Popup } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import "../styles/components/MapMarker.scss";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import { Icon } from "leaflet";
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+type D = Icon.Default & {
+  _getIconUrl?: string;
+};
 
-L.Icon.Default.mergeOptions({
+delete (Icon.Default.prototype as D)._getIconUrl;
+
+Icon.Default.mergeOptions({
   iconRetinaUrl: "/images/marker-icon-2x.png",
   iconUrl: "/images/marker-icon.png",
   shadowUrl: "/images/marker-shadow.png",
