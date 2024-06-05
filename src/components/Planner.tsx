@@ -12,11 +12,10 @@ function PlannerLists ({ trip }: Props) {
 
   return (
     <div className="lists">
-      <PlannerCard />
-      <PlannerStayCard />
-      <PlannerCard />
-      <PlannerCard />
-      <PlannerCard />
+      {trip.destinations.map((dest) =>
+        dest.lengthOfStay ? <PlannerStayCard dest={dest} /> :
+          <PlannerCard dest={dest} />)
+      }
     </div>
   );
 }
@@ -39,6 +38,36 @@ function Planner () {
     customLabel: null,
     arrivalDate: new Date(),
     lengthOfStay: 0,
+    notes: null,
+  },
+  {
+    label: "Marceille",
+    latLang: [51.505, -0.09],
+    address: "69100",
+    order: 2,
+    customLabel: null,
+    arrivalDate: new Date(),
+    lengthOfStay: 3,
+    notes: null,
+  },
+  {
+    label: "Marceille",
+    latLang: [51.505, -0.09],
+    address: "69100",
+    order: 3,
+    customLabel: null,
+    arrivalDate: new Date(),
+    lengthOfStay: 0,
+    notes: null,
+  },
+  {
+    label: "Marceille",
+    latLang: [51.505, -0.09],
+    address: "69100",
+    order: 4,
+    customLabel: null,
+    arrivalDate: new Date(),
+    lengthOfStay: 1,
     notes: null,
   }];
 

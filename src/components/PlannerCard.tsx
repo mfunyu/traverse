@@ -1,4 +1,9 @@
 import "../styles/components/PlannerCard.scss";
+import { DestinationObject } from "../types/destination";
+
+type Props = {
+  dest: DestinationObject;
+  }
 
 function PlannerItem () {
   return (
@@ -12,7 +17,7 @@ function PlannerItem () {
   );
 }
 
-export function PlannerStayCard () {
+export function PlannerStayCard ({ dest }: Props) {
   return (
     <div className="card-stay">
       <div className="tag">stay</div>
@@ -25,7 +30,7 @@ export function PlannerStayCard () {
   );
 }
 
-function PlannerCard () {
+function PlannerCard ({ dest }: Props) {
   return (
     <div className="card">
       <h3>Wednesday</h3>
