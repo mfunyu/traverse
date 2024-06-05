@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/components/Planner.scss";
 import PlannerCard, { PlannerStayCard } from "./PlannerCard";
 import Modal from "./Modal";
@@ -29,7 +28,7 @@ function Planner () {
       <Modal />
       <div className="planner">
         <div className="contents">
-          <PlannerHeader/ >
+          <PlannerHeader />
           <PlannerLists />
         </div>
       </div>
