@@ -1,0 +1,74 @@
+@use '../base';
+
+$border-radius: 4px;
+
+.card {
+  background-color: base.$secondary-color;
+  color: base.$text-color;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  h3 {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 0.5em;
+  }
+
+  .item {
+    display: flex;
+    border: solid;
+    padding: 0.5em;
+    border-width: 0 0 1px 0;
+    border-color: base.$primary-color;
+    margin: -1px;
+
+    &:hover {
+      background-color: base.$primary-color;
+      border-radius: $border-radius;
+    }
+
+    .circle-number {
+      width: 30px;
+      height: 30px;
+      padding-top: 5px;
+      border: 1px solid black;
+      border-radius: 50%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .details {
+      flex: 1;
+      padding: 0 1em;
+      text-align: left;
+
+      h4 {
+        margin: 0;
+        margin-bottom: 0.5em;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.card-stay {
+  @extend .card;
+  border: solid;
+  border-width: 5px;
+  border-color: base.$accent-color;
+  position: relative;
+
+  .tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 2px 7px 7px;
+    border-radius: 0 0 0 $border-radius;
+    background-color: base.$accent-color;
+    color: base.$secondary-color;
+  }
+}

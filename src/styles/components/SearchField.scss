@@ -1,0 +1,9 @@
+$bar-size: calc((100% - 420px) * 0.5);
+
+.leaflet-geosearch-bar {
+  position: absolute;
+  top: 50px;
+  right: calc((100% - 420px - $bar-size) / 2);
+  padding: 3em;
+  width: $bar-size;
+}

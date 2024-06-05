@@ -1,0 +1,82 @@
+@use '../base';
+
+$border-radius: 4px;
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .modal-content {
+    background-color: base.$secondary-color;
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    min-width: 350px;
+    max-width: 700px;
+    border-radius: $border-radius;
+
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-weight: bold;
+      font-size: 35px;
+
+      &:hover,
+      &:focus {
+        color: base.$accent-color;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1em;
+      padding: 0 1em ;
+      color: base.$text-color;
+
+      .label {
+        margin: 0 0.5em 0.5em 0.5em;
+        text-align: left;
+      }
+
+      input {
+        padding: 12px 20px;
+        display: inline-block;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: none;
+          border-bottom: 1px solid base.$accent-color;
+        }
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+
+      .modal-button {
+        background-color: base.$primary-color;
+        color: base.$secondary-color;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken(base.$primary-color, 10%);
+        }
+      }
+    }
+  }
+}
