@@ -1,17 +1,24 @@
 import "../styles/components/PlannerCard.scss";
 import { DestinationObject } from "../types/destination";
+import { PlanObject } from "../types/plan";
 
 type Props = {
-  dest: DestinationObject;
-  }
+  plan: PlanObject;
+  index: number;
+}
 
-function PlannerItem () {
+type ChildProps = {
+  dest: DestinationObject;
+  index: number;
+}
+
+function PlannerItem ({ dest, index }: ChildProps) {
   return (
     <div className="item">
-      <div className="circle-number">1</div>
+      <div className="circle-number">{index}</div>
       <div className="details">
-        <h4>Lyon</h4>
-        <p>69100</p>
+        <h4>{dest.customLabel ? dest.customLabel : dest.label}</h4>
+        <p>{dest.address}</p>
       </div>
     </div>
   );
@@ -21,30 +28,28 @@ function getDateString (date: Date) {
   return date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long" });
 }
 
-export function PlannerStayCard ({ dest }: Props) {
-  const startDateString = getDateString(dest.arrivalDate);
-  const endDateString = getDateString(new Date(dest.arrivalDate.getTime() + dest.lengthOfStay * 24 * 60 * 60 * 1000));
+export function PlannerStayCard ({ plan, index }: Props) {
+  const startDateString = getDateString(plan.date);
+  const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
 
   return (
     <div className="card-stay">
       <div className="tag">stay</div>
       <h3>{startDateString} - {endDateString}</h3>
-      <PlannerItem />
-      <PlannerItem />
+      <PlannerItem dest={plan.destinations[0]} index={index}/>
       <div className="item-body">
       </div>
     </div>
   );
 }
 
-function PlannerCard ({ dest }: Props) {
-  const dateString = getDateString(dest.arrivalDate);
+function PlannerCard ({ plan, index }: Props) {
+  const dateString = getDateString(plan.date);
 
   return (
     <div className="card">
       <h3>{dateString}</h3>
-      <PlannerItem />
-      <PlannerItem />
+      {plan.destinations.map((dest) => <PlannerItem dest={dest} index={index++}/>)}
       <div className="item-body">
       </div>
     </div>

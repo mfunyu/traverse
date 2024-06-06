@@ -5,7 +5,6 @@ export interface DestinationObject {
   latLang: LatLngTuple;
   address: string;
 
-  order: number;
   customLabel: string | null;
   arrivalDate: Date;
   lengthOfStay: number;
