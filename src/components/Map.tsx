@@ -5,9 +5,17 @@ import SearchField from "./SearchField";
 import "../styles/components/SearchField.scss";
 import { LatLngTuple } from "leaflet";
 import MapMarker from "./MapMarker";
+import { TripObject } from "../types/trip";
+import { DestinationObject } from "../types/destination";
 
-function Map() {
+type Props = {
+  trip: TripObject;
+}
+
+function Map({ trip }: Props) {
   const position: LatLngTuple = [51.505, -0.09];
+  const allDests: DestinationObject[] = trip.plans.reduce((acc: DestinationObject[], plan) => { return acc.concat(plan.destinations); }, []);
+
   return (
     <div className="map">
       <MapContainer
@@ -21,7 +29,7 @@ function Map() {
         />
         <ZoomControl position="bottomright" />
         <SearchField />
-        <MapMarker />
+        {allDests.map((dest, index) => <MapMarker key={index} dest={dest} index={index + 1}/>)}
       </MapContainer>
     </div>
   );

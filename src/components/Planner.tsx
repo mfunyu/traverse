@@ -59,83 +59,16 @@ function PlannerHeader ({ trip }: Props) {
   );
 }
 
-function Planner () {
-  const plans: PlanObject[] = [{
-    date: new Date(),
-    endDate: null,
-    destinations: [{
-      label: "Lyon",
-      latLang: [51.505, -0.09],
-      address: "69100",
-      customLabel: null,
-      arrivalDate: new Date(),
-      lengthOfStay: 0,
-      notes: null,
-    }]
-  },
-  {
-    date: new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000)),
-    endDate: null,
-    destinations: [{
-      label: "Marceille",
-      latLang: [51.505, -0.09],
-      address: "80 rue de la république, 59100",
-      customLabel: null,
-      arrivalDate: new Date(),
-      lengthOfStay: 3,
-      notes: null,
-    },
-    {
-      label: "Nice",
-      latLang: [51.505, -0.09],
-      address: "33 rue de la république, 34100",
-      customLabel: null,
-      arrivalDate: new Date(),
-      lengthOfStay: 0,
-      notes: null,
-    }]
-  },
-  {
-    date: new Date(new Date().getTime() + (3 * 24 * 60 * 60 * 1000)),
-    endDate: new Date(new Date().getTime() + (6 * 24 * 60 * 60 * 1000)),
-    destinations: [{
-      label: "Paris",
-      latLang: [51.505, -0.09],
-      address: "21 avenue des champs elysées, 75000",
-      customLabel: null,
-      arrivalDate: new Date(),
-      lengthOfStay: 1,
-      notes: "This is a note",
-    }]
-  },
-  {
-    date: new Date(new Date().getTime() + (8 * 24 * 60 * 60 * 1000)),
-    endDate: new Date(new Date().getTime() + (9 * 24 * 60 * 60 * 1000)),
-    destinations: [{
-      label: "Paris2",
-      latLang: [51.505, -0.09],
-      address: "21 avenue des champs elysées, 75000",
-      customLabel: null,
-      arrivalDate: new Date(),
-      lengthOfStay: 1,
-      notes: "This is a note",
-    }]
-  }];
+function Planner ({ trip }: Props) {
 
-  const trips: TripObject[] = [{
-    label: "Trip to Paris!",
-    plans: plans,
-  }];
-
-  const currentTrip = trips[0];
 
   return (
     <>
       {/* <Modal /> */}
       <div className="planner">
         <div className="contents">
-          <PlannerHeader trip={currentTrip}/>
-          <PlannerLists trip={currentTrip} />
+          <PlannerHeader trip={trip}/>
+          <PlannerLists trip={trip} />
         </div>
       </div>
     </>
