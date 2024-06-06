@@ -1,7 +1,6 @@
 import "../styles/components/Planner.scss";
 import PlannerCard, { PlannerStayCard } from "./PlannerCard";
 import Modal from "./Modal";
-import { DestinationObject } from "../types/destination";
 import { TripObject } from "../types/trip";
 import { PlanObject } from "../types/plan";
 
@@ -9,18 +8,38 @@ type Props = {
   trip: TripObject;
 }
 
+/* Time must be always 00:00:00, edit if adding time related features */
+function isNotNextDay(date1: Date, date2: Date) {
+  const timeDiff = date2.getTime() - date1.getTime();
+  const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+  return dayDiff > 1;
+}
+
 function PlannerLists ({ trip }: Props) {
   let totalIndex = 1;
+  let prevDate: Date | null = null;
+
   return (
     <div className="lists">
       {trip.plans.map((plan) => {
         const prevIndex = totalIndex;
         totalIndex += plan.destinations.length;
-        return (
-          plan.endDate ? <PlannerStayCard plan={plan} index={prevIndex}/> :
-            <PlannerCard plan={plan} index={prevIndex}/>);
-      })
-      }
+
+        let fillerComponent = null;
+        if (prevDate && isNotNextDay(prevDate, plan.date)) {
+          const emptyPlan = {
+            date: new Date(prevDate.getTime() + (24 * 60 * 60 * 1000)),
+            endDate: plan.date,
+            destinations: [],
+          };
+          fillerComponent = <PlannerCard plan={emptyPlan} index={prevIndex}/>;
+        }
+        prevDate = plan.endDate ? plan.endDate : plan.date;
+
+        const component = plan.endDate ? <PlannerStayCard plan={plan} index={prevIndex}/> : <PlannerCard plan={plan} index={prevIndex}/>;
+        return (<>{fillerComponent}{component}</>);
+      })}
     </div>
   );
 }
