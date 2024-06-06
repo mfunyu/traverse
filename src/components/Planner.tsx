@@ -1,3 +1,4 @@
+import React from "react";
 import "../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
 import Modal from "./Modal";
@@ -35,11 +36,16 @@ function PlannerLists ({ trip }: Props) {
             endDate: endDate,
             destinations: [],
           };
-          fillerComponent = <PlannerCard plan={emptyPlan} index={prevIndex}/>;
+          fillerComponent = <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
         }
         prevDate = plan.endDate ? plan.endDate : plan.date;
 
-        return (<>{fillerComponent}<PlannerCard plan={plan} index={prevIndex}/></>);
+        return (
+          <React.Fragment key={prevIndex}>
+            {fillerComponent}
+            <PlannerCard plan={plan} key="normal" index={prevIndex} />
+          </React.Fragment>
+        );
       })}
     </div>
   );

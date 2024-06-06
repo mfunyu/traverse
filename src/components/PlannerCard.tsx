@@ -49,7 +49,7 @@ function PlannerStayCard ({ plan, index }: Props) {
     <div className="card-stay">
       <div className="tag">stay</div>
       <h3>{startDateString} - {endDateString}</h3>
-      {plan.destinations.length && <PlannerItem dest={plan.destinations[0]} index={index}/>}
+      <PlannerItem dest={plan.destinations[0]} index={index}/>
       <div className="item-body">
       </div>
     </div>
@@ -62,7 +62,7 @@ function PlannerOneDayCard ({ plan, index }: Props) {
   return (
     <div className="card">
       <h3>{dateString}</h3>
-      {plan.destinations.length && plan.destinations.map((dest) => <PlannerItem dest={dest} index={index++}/>)}
+      {plan.destinations.length && plan.destinations.map((dest) => <PlannerItem dest={dest} key={index} index={index++}/>)}
       <div className="item-body">
       </div>
     </div>
