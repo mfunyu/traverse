@@ -23,9 +23,9 @@ function PlannerLists ({ trip }: Props) {
 
   return (
     <>
-      <Modal dest={trip.plans[0].destinations[0]} />
+      {/* <Modal dest={trip.plans[0].destinations[0]} /> */}
       <div className="lists">
-        {trip.plans.map((plan) => {
+        {trip.planController.plans.map((plan) => {
           const prevIndex = totalIndex;
           totalIndex += plan.destinations.length;
 

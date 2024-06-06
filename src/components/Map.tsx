@@ -14,7 +14,7 @@ type Props = {
 
 function Map({ trip }: Props) {
   const position: LatLngTuple = [51.505, -0.09];
-  const allDests: DestinationObject[] = trip.plans.reduce((acc: DestinationObject[], plan) => { return acc.concat(plan.destinations); }, []);
+  const allDests: DestinationObject[] = trip.planController.getDestinations();
 
   return (
     <div className="map">

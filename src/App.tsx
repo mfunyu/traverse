@@ -5,6 +5,7 @@ import "./styles/App.scss";
 import Map from "./components/Map";
 import { PlanObject } from "./types/plan";
 import { TripObject } from "./types/trip";
+import { PlanController } from "./class/PlanController";
 
 function App() {
   const plans: PlanObject[] = [{
@@ -71,7 +72,7 @@ function App() {
 
   const trips: TripObject[] = [{
     label: "Trip to Paris!",
-    plans: plans,
+    planController: new PlanController(plans),
   }];
 
   return (
