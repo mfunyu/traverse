@@ -1,5 +1,5 @@
 import "../styles/components/Planner.scss";
-import PlannerCard, { PlannerStayCard } from "./PlannerCard";
+import PlannerCard from "./PlannerCard";
 import Modal from "./Modal";
 import { TripObject } from "../types/trip";
 import { PlanObject } from "../types/plan";
@@ -28,17 +28,18 @@ function PlannerLists ({ trip }: Props) {
 
         let fillerComponent = null;
         if (prevDate && isNotNextDay(prevDate, plan.date)) {
+          const startDate = new Date(prevDate.getTime() + (24 * 60 * 60 * 1000));
+          const endDate = isNotNextDay(startDate, plan.date) ? new Date(plan.date.getTime() - (24 * 60 * 60 * 1000)) : null;
           const emptyPlan = {
-            date: new Date(prevDate.getTime() + (24 * 60 * 60 * 1000)),
-            endDate: plan.date,
+            date: startDate,
+            endDate: endDate,
             destinations: [],
           };
           fillerComponent = <PlannerCard plan={emptyPlan} index={prevIndex}/>;
         }
         prevDate = plan.endDate ? plan.endDate : plan.date;
 
-        const component = plan.endDate ? <PlannerStayCard plan={plan} index={prevIndex}/> : <PlannerCard plan={plan} index={prevIndex}/>;
-        return (<>{fillerComponent}{component}</>);
+        return (<>{fillerComponent}<PlannerCard plan={plan} index={prevIndex}/></>);
       })}
     </div>
   );
@@ -93,6 +94,19 @@ function Planner () {
     endDate: new Date(new Date().getTime() + (6 * 24 * 60 * 60 * 1000)),
     destinations: [{
       label: "Paris",
+      latLang: [51.505, -0.09],
+      address: "21 avenue des champs elysées, 75000",
+      customLabel: null,
+      arrivalDate: new Date(),
+      lengthOfStay: 1,
+      notes: "This is a note",
+    }]
+  },
+  {
+    date: new Date(new Date().getTime() + (8 * 24 * 60 * 60 * 1000)),
+    endDate: new Date(new Date().getTime() + (9 * 24 * 60 * 60 * 1000)),
+    destinations: [{
+      label: "Paris2",
       latLang: [51.505, -0.09],
       address: "21 avenue des champs elysées, 75000",
       customLabel: null,

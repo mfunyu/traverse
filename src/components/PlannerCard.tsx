@@ -28,7 +28,20 @@ function getDateString (date: Date) {
   return date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long" });
 }
 
-export function PlannerStayCard ({ plan, index }: Props) {
+function PlannerEmptyCard ({ plan, index }: Props) {
+  const startDateString = getDateString(plan.date);
+  const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
+
+  return (
+    <div className="card">
+      {plan.endDate ? <h3>{startDateString} - {endDateString}</h3> : <h3>{startDateString}</h3>}
+      <div className="item-body">
+      </div>
+    </div>
+  );
+}
+
+function PlannerStayCard ({ plan, index }: Props) {
   const startDateString = getDateString(plan.date);
   const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
 
@@ -36,7 +49,20 @@ export function PlannerStayCard ({ plan, index }: Props) {
     <div className="card-stay">
       <div className="tag">stay</div>
       <h3>{startDateString} - {endDateString}</h3>
-      <PlannerItem dest={plan.destinations[0]} index={index}/>
+      {plan.destinations.length && <PlannerItem dest={plan.destinations[0]} index={index}/>}
+      <div className="item-body">
+      </div>
+    </div>
+  );
+}
+
+function PlannerOneDayCard ({ plan, index }: Props) {
+  const dateString = getDateString(plan.date);
+
+  return (
+    <div className="card">
+      <h3>{dateString}</h3>
+      {plan.destinations.length && plan.destinations.map((dest) => <PlannerItem dest={dest} index={index++}/>)}
       <div className="item-body">
       </div>
     </div>
@@ -44,16 +70,10 @@ export function PlannerStayCard ({ plan, index }: Props) {
 }
 
 function PlannerCard ({ plan, index }: Props) {
-  const dateString = getDateString(plan.date);
-
-  return (
-    <div className="card">
-      <h3>{dateString}</h3>
-      {plan.destinations.map((dest) => <PlannerItem dest={dest} index={index++}/>)}
-      <div className="item-body">
-      </div>
-    </div>
-  );
+  if (plan.destinations.length === 0) {
+    return <PlannerEmptyCard plan={plan} index={index}/>;
+  }
+  return plan.endDate ? <PlannerStayCard plan={plan} index={index}/> : <PlannerOneDayCard plan={plan} index={index}/>;
 }
 
 export default PlannerCard;
