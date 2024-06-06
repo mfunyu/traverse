@@ -22,32 +22,35 @@ function PlannerLists ({ trip }: Props) {
   let prevDate: Date | null = null;
 
   return (
-    <div className="lists">
-      {trip.plans.map((plan) => {
-        const prevIndex = totalIndex;
-        totalIndex += plan.destinations.length;
+    <>
+      <Modal dest={trip.plans[0].destinations[0]} />
+      <div className="lists">
+        {trip.plans.map((plan) => {
+          const prevIndex = totalIndex;
+          totalIndex += plan.destinations.length;
 
-        let fillerComponent = null;
-        if (prevDate && isNotNextDay(prevDate, plan.date)) {
-          const startDate = new Date(prevDate.getTime() + (24 * 60 * 60 * 1000));
-          const endDate = isNotNextDay(startDate, plan.date) ? new Date(plan.date.getTime() - (24 * 60 * 60 * 1000)) : null;
-          const emptyPlan = {
-            date: startDate,
-            endDate: endDate,
-            destinations: [],
-          };
-          fillerComponent = <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
-        }
-        prevDate = plan.endDate ? plan.endDate : plan.date;
+          let fillerComponent = null;
+          if (prevDate && isNotNextDay(prevDate, plan.date)) {
+            const startDate = new Date(prevDate.getTime() + (24 * 60 * 60 * 1000));
+            const endDate = isNotNextDay(startDate, plan.date) ? new Date(plan.date.getTime() - (24 * 60 * 60 * 1000)) : null;
+            const emptyPlan = {
+              date: startDate,
+              endDate: endDate,
+              destinations: [],
+            };
+            fillerComponent = <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
+          }
+          prevDate = plan.endDate ? plan.endDate : plan.date;
 
-        return (
-          <React.Fragment key={prevIndex}>
-            {fillerComponent}
-            <PlannerCard plan={plan} key="normal" index={prevIndex} />
-          </React.Fragment>
-        );
-      })}
-    </div>
+          return (
+            <React.Fragment key={prevIndex}>
+              {fillerComponent}
+              <PlannerCard plan={plan} key="normal" index={prevIndex} />
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </>
   );
 }
 
@@ -64,7 +67,6 @@ function Planner ({ trip }: Props) {
 
   return (
     <>
-      {/* <Modal /> */}
       <div className="planner">
         <div className="contents">
           <PlannerHeader trip={trip}/>

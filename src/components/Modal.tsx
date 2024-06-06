@@ -1,12 +1,17 @@
 import "../styles/components/Modal.scss";
+import { DestinationObject } from "../types/destination";
 
-type Props = {
+type ChildProps = {
   label: string;
   placeholder: string;
   type: string;
 }
 
-function InputField({ label, placeholder, type }: Props) {
+type Props = {
+  dest: DestinationObject;
+}
+
+function InputField({ label, placeholder, type }: ChildProps) {
   return (
     <div className="input-field">
       <h4 className="label">{label}</h4>
@@ -21,7 +26,7 @@ function InputField({ label, placeholder, type }: Props) {
   );
 }
 
-function Modal() {
+function Modal({ dest }: Props) {
 /*   const [name, setName] = useState(destination.name);
   const [address, setAddress] = useState(destination.address);
 
@@ -36,8 +41,8 @@ function Modal() {
         <span className="close-button"/*  onClick={onClose} */>
           &times;
         </span>
-        <h2>Lyon</h2>
-        <p>69100, 60 Rue Marceille</p>
+        <h2>{dest.label}</h2>
+        <p>{dest.address}</p>
         <InputField label="Display name" placeholder="Lyon" type="text"/>
         <InputField label="Arrival date" placeholder="undefined" type="date"/>
         <InputField label="Length of stay" placeholder="0" type="number"/>
