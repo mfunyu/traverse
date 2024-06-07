@@ -7,7 +7,7 @@ function sortPlans(a: PlanObject, b: PlanObject): number {
       return 1;
     return -1;
   }
-  return b.date.getTime() - a.date.getTime();
+  return a.date.getTime() - b.date.getTime();
 }
 
 export class PlanController {
@@ -33,24 +33,26 @@ export class PlanController {
   }
 
   findPlanByDate(date: Date, endDate: Date | null): PlanObject {
+    const newDateInTime = date.getTime();
     for (const plan of this._plans) {
+      const planDateInTime = plan.date.getTime();
       if (!endDate) {
-        if (plan.date.getTime() > date.getTime()) {
+        if (planDateInTime > newDateInTime) {
           return this.createPlan(date, endDate);
-        } else if (plan.date.getTime() === date.getTime()) {
+        } else if (planDateInTime === newDateInTime) {
           return plan;
-        } else if (plan.endDate && plan.endDate.getTime() > date.getTime()) {
+        } else if (plan.endDate && plan.endDate.getTime() > newDateInTime) {
           throw new Error("Cannot add a plan that overlaps with an existing plan");
         }
       } else {
-        if (plan.date.getTime() > date.getTime()) {
-          if (plan.date.getTime() >= endDate.getTime()) {
+        if (planDateInTime > newDateInTime) {
+          if (planDateInTime >= endDate.getTime()) {
             return this.createPlan(date, endDate);
           } else {
             throw new Error("Cannot add a plan that overlaps with an existing plan");
           }
         }
-        if (plan.endDate && plan.endDate.getTime() > date.getTime()) {
+        if (plan.endDate && plan.endDate.getTime() > newDateInTime) {
           throw new Error("Cannot add a plan that overlaps with an existing plan");
         }
       }
@@ -59,7 +61,11 @@ export class PlanController {
   }
 
   addDestination(destination: DestinationObject) {
-    const plan = this.findPlanByDate(destination.arrivalDate, new Date(destination.arrivalDate.getTime() + (destination.lengthOfStay * 24 * 60 * 60 * 1000)));
+    let endDate: Date | null = null;
+    if (destination.lengthOfStay !== 0) {
+      endDate = new Date(destination.arrivalDate.getTime() + (destination.lengthOfStay * 24 * 60 * 60 * 1000));
+    }
+    const plan = this.findPlanByDate(destination.arrivalDate, endDate);
     plan.destinations.push(destination);
   }
 
