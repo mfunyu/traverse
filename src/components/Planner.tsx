@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
 import Modal from "./Modal";
@@ -20,10 +20,16 @@ function isNotNextDay(date1: Date, date2: Date) {
 function PlannerLists ({ trip }: Props) {
   let totalIndex = 1;
   let prevDate: Date | null = null;
+  const [modalOpen, setModalOpen] = useState(true);
+
+  function handleCloseModal() {
+    setModalOpen(false);
+  }
+
 
   return (
     <>
-      {/* <Modal dest={trip.plans[0].destinations[0]} /> */}
+      {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>}
       <div className="lists">
         {trip.planController.plans.map((plan) => {
           const prevIndex = totalIndex;

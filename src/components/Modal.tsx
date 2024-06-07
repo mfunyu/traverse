@@ -5,13 +5,15 @@ type ChildProps = {
   label: string;
   placeholder: string;
   type: string;
+  required: boolean;
 }
 
 type Props = {
   dest: DestinationObject;
+  onClose: () => void;
 }
 
-function InputField({ label, placeholder, type }: ChildProps) {
+function InputField({ label, placeholder, type, required = false }: ChildProps) {
   return (
     <div className="input-field">
       <h4 className="label">{label}</h4>
@@ -21,12 +23,13 @@ function InputField({ label, placeholder, type }: ChildProps) {
         placeholder={placeholder}
         type={type}
         min="0"
+        required={required}
       />
     </div>
   );
 }
 
-function Modal({ dest }: Props) {
+function Modal({ dest, onClose }: Props) {
 /*   const [name, setName] = useState(destination.name);
   const [address, setAddress] = useState(destination.address);
 
@@ -38,15 +41,15 @@ function Modal({ dest }: Props) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close-button"/*  onClick={onClose} */>
+        <span className="close-button" onClick={onClose}>
           &times;
         </span>
         <h2>{dest.label}</h2>
         <p>{dest.address}</p>
-        <InputField label="Display name" placeholder="Lyon" type="text"/>
-        <InputField label="Arrival date" placeholder="undefined" type="date"/>
-        <InputField label="Length of stay" placeholder="0" type="number"/>
-        <InputField label="Notes" placeholder="add notes" type="text"/>
+        <InputField label="Display name" placeholder="Lyon" type="text" required={false}/>
+        <InputField label="Arrival date" placeholder="undefined" type="date" required={true}/>
+        <InputField label="Length of stay" placeholder="0" type="number" required={false}/>
+        <InputField label="Notes" placeholder="add notes" type="text" required={false}/>
         <div className="modal-footer">
           <button /* onClick={onClose} */ className="modal-button">
             x remove destination
