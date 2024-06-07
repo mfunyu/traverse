@@ -13,9 +13,10 @@ import { useState } from "react";
 
 type Props = {
   trip: TripObject;
+  onAddDestination: (newDest: DestinationObject) => void;
 }
 
-function Map({ trip }: Props) {
+function Map({ trip, onAddDestination }: Props) {
   const position: LatLngTuple = [51.505, -0.09];
   const allDests: DestinationObject[] = trip.planController.getDestinations();
 
@@ -35,7 +36,7 @@ function Map({ trip }: Props) {
 
   return (
     <>
-      {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal} />}
+      {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal} addDestination={onAddDestination}/>}
       <div className="map">
         <MapContainer
           center={position}

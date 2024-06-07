@@ -29,7 +29,7 @@ function PlannerLists ({ trip }: Props) {
 
   return (
     <>
-      {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>}
+      {/* {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>} */}
       <div className="lists">
         {trip.planController.plans.map((plan) => {
           const prevIndex = totalIndex;
