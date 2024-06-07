@@ -16,7 +16,8 @@ function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number,
     popupFormat: ({ result }: { result: SearchResult }) =>
       `<div class="custom-popup-item">
         <div class="text">
-          <h3>${result.label}</h3>
+          <h3>${result.label.split(",")[0]}</h3>
+          <p>${result.label}</p>
         <div>
         <button onclick="addLocation(${result.x}, ${result.y}, '${result.label}')">+ Add to route</button>
       </div>`,

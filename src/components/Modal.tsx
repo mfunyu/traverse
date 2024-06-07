@@ -1,4 +1,3 @@
-import { LatLng } from "leaflet";
 import "../styles/components/Modal.scss";
 import { DestinationObject } from "../types/destination";
 
@@ -78,6 +77,7 @@ export function AddModal({ latLng, label, onClose }: Props1) {
     onClose();
   };
   */
+  const name = label.split(",")[0];
   const address = label;
 
   return (
@@ -86,7 +86,7 @@ export function AddModal({ latLng, label, onClose }: Props1) {
         <span className="close-button" onClick={onClose}>
           &times;
         </span>
-        <h2>{label}</h2>
+        <h2>{name}</h2>
         <p>{address}</p>
         <InputField label="Display name" placeholder="Lyon" type="text" required={false}/>
         <InputField label="Arrival date" placeholder="undefined" type="date" required={true}/>
