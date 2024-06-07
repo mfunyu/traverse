@@ -38,20 +38,6 @@ function MarkerInRoute({ dest, index }: Props) {
   );
 }
 
-function MarkerNotInRoute() {
-  return (
-    <div className="popup-item">
-      <div className="text">
-        < div className="details">
-          <h3>Lyon</h3>
-          <p>69100 France </p>
-        </div >
-      </div >
-      <button>+ Add to route</button>
-    </div >
-  );
-}
-
 function MapMarker({ dest, index }: Props) {
 
   return (

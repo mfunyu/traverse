@@ -3,6 +3,7 @@ import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import "leaflet-geosearch/dist/geosearch.css";
 import { useMap } from "react-leaflet";
 import * as L from "leaflet";
+import { SearchResult } from "leaflet-geosearch/dist/providers/provider";
 
 const SearchField = () => {
   console.log("SearchField");
@@ -13,7 +14,7 @@ const SearchField = () => {
     provider: provider,
     style: "bar",
     showPopup: true,
-    popupFormat: ({ result }: { result: any }) =>
+    popupFormat: ({ result }: { result: SearchResult }) =>
       `<div class="custom-popup-item">
         <div class="text">
           <h3>${result.label}</h3>
@@ -30,13 +31,7 @@ const SearchField = () => {
   useEffect(() => {
     map.addControl(searchControl as L.Control);
 
-    // Add event listener for search results
-    map.on("geosearch/showlocation", (result) => {
-      console.log("Search result:", result);
-      // process the result here, e.g., update state, show a custom popup, etc.
-    });
-
-    (window as any).addLocation = (x: number, y: number) => {
+    window.addLocation = (x: number, y: number) => {
       alert(`Location added: ${x}, ${y}`);
       // Add your custom logic here to handle the location addition
     };
