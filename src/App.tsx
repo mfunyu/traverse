@@ -1,14 +1,13 @@
 import React from "react";
 import NavigationBar from "./components/NavigationBar";
-import Planner from "./components/Planner";
 import "./styles/App.scss";
-import Map from "./components/Map";
 import { PlanObject } from "./types/plan";
 import { TripObject } from "./types/trip";
 import { PlanController } from "./class/PlanController";
+import Contents from "./components/Contents";
 
 function App() {
-  const plans: PlanObject[] = [{
+  const planData: PlanObject[] = [{
     date: new Date(),
     endDate: null,
     destinations: [{
@@ -72,14 +71,13 @@ function App() {
 
   const trips: TripObject[] = [{
     label: "Trip to Paris!",
-    planController: new PlanController(plans),
+    planController: new PlanController(planData),
   }];
 
   return (
     <div className="App">
       <NavigationBar />
-      <Planner trip={trips[0]}/>
-      <Map trip={trips[0]}/>
+      <Contents trip={trips[0]} />
     </div>
   );
 }

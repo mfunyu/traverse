@@ -1,4 +1,4 @@
 
 interface Window {
-	addLocation: (x: number, y: number) => void;
+	addLocation: (x: number, y: number, label:string) => void;
 }
