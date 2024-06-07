@@ -4,6 +4,14 @@ import "leaflet-geosearch/dist/geosearch.css";
 import { useMap } from "react-leaflet";
 import { SearchResult } from "leaflet-geosearch/dist/providers/provider";
 
+const escapeHTML = (str: string) => {
+  return str.replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
 function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number, label: string) => void }){
   console.log("SearchField");
   const provider = new OpenStreetMapProvider();
@@ -13,14 +21,18 @@ function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number,
     provider: provider,
     style: "bar",
     showPopup: true,
-    popupFormat: ({ result }: { result: SearchResult }) =>
-      `<div class="custom-popup-item">
+    popupFormat: ({ result }: { result: SearchResult }) => {
+      const escapedLabel = escapeHTML(result.label);
+      const [mainLabel] = escapedLabel.split(",");
+
+      return (`<div class="custom-popup-item">
         <div class="text">
-          <h3>${result.label.split(",")[0]}</h3>
-          <p>${result.label}</p>
+          <h3>${mainLabel}</h3>
+          <p>${escapedLabel}</p>
         <div>
-        <button onclick="addLocation(${result.x}, ${result.y}, '${result.label}')">+ Add to route</button>
-      </div>`,
+        <button onclick='addLocation(${result.x}, ${result.y}, "${escapedLabel}")'>+ Add to route</button>
+      </div>`);
+    },
   };
 
   const searchControl = new GeoSearchControl(options);
