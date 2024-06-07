@@ -9,16 +9,17 @@ import { TripObject } from "../types/trip";
 import { DestinationObject } from "../types/destination";
 import "../styles/components/MapMarker.scss";
 import { AddModal } from "./Modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PlansContext } from "./PlansContext";
 
 type Props = {
-  trip: TripObject;
   onAddDestination: (newDest: DestinationObject) => void;
 }
 
-function Map({ trip, onAddDestination }: Props) {
+function Map({ onAddDestination }: Props) {
+  const plans = useContext(PlansContext);
   const position: LatLngTuple = [51.505, -0.09];
-  const allDests: DestinationObject[] = trip.planController.getDestinations();
+  const allDests: DestinationObject[] = plans.reduce((acc: DestinationObject[], plan) => acc.concat(plan.destinations), []);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [latLng, setLatLng] = useState([0, 0]);

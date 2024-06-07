@@ -1,6 +1,6 @@
-import { PlanController } from "../class/PlanController";
+import { PlanObject } from "./plan";
 
 export interface TripObject {
 	label: string;
-	planController: PlanController;
+	plans: PlanObject[];
 }

@@ -3,7 +3,6 @@ import NavigationBar from "./components/NavigationBar";
 import "./styles/App.scss";
 import { PlanObject } from "./types/plan";
 import { TripObject } from "./types/trip";
-import { PlanController } from "./class/PlanController";
 import Contents from "./components/Contents";
 
 function App() {
@@ -71,7 +70,7 @@ function App() {
 
   const trips: TripObject[] = [{
     label: "Trip to Paris!",
-    planController: new PlanController(planData),
+    plans: planData,
   }];
 
   return (

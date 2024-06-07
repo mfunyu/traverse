@@ -26,12 +26,11 @@ function PlannerLists ({ trip }: Props) {
     setModalOpen(false);
   }
 
-
   return (
     <>
       {/* {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>} */}
       <div className="lists">
-        {trip.planController.plans.map((plan) => {
+        {trip.plans.map((plan) => {
           const prevIndex = totalIndex;
           totalIndex += plan.destinations.length;
 
@@ -70,7 +69,7 @@ function PlannerHeader ({ trip }: Props) {
 
 function Planner ({ trip }: Props) {
 
-
+  console.log("Planner.tsx: trip", trip);
   return (
     <>
       <div className="planner">
