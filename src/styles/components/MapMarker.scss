@@ -33,34 +33,62 @@ $border-radius: 4px;
     }
   }
 
+  $background-color: base.$primary-color;
   button {
     width: 100%;
     padding: 0.75em 1.5em;
     font-weight: bold;
     color: base.$secondary-color;
-    background-color: base.$primary-color;
+    background-color: $background-color;
     border: none;
     border-radius: $border-radius;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken(base.$primary-color, 10%);
+      background-color: darken($background-color, 10%);
     }
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(base.$primary-color, 0.5);
+      box-shadow: 0 0 0 3px rgba($background-color, 0.5);
     }
 
     &:active {
-      background-color: darken(base.$primary-color, 20%);
+      background-color: darken($background-color, 20%);
     }
 
     &.disabled {
-      background-color: lighten(base.$primary-color, 30%);
+      background-color: lighten($background-color, 30%);
       cursor: not-allowed;
       opacity: 0.6;
+    }
+  }
+}
+.custom-popup-item {
+  @extend .popup-item;
+  display: flex;
+
+  .text {
+    display: block;
+  }
+
+  $background-color: base.$accent-color;
+
+  button {
+    background-color: $background-color;
+
+    &:hover {
+      background-color: darken($background-color, 10%);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($background-color, 0.5);
+    }
+
+    &:active {
+      background-color: darken($background-color, 20%);
     }
   }
 }

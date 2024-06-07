@@ -13,6 +13,14 @@ const SearchField = () => {
     provider: provider,
     style: "bar",
     showPopup: true,
+    popupFormat: ({ result }: { result: any }) =>
+      `<div class="custom-popup-item">
+        <div class="text">
+          <h3>${result.label}</h3>
+          <p>${result.label}</p>
+        <div>
+        <button onclick="addLocation(${result.x}, ${result.y})">+ Add to route</button>
+      </div>`,
   };
 
   const searchControl = new GeoSearchControl(options);
@@ -27,6 +35,11 @@ const SearchField = () => {
       console.log("Search result:", result);
       // process the result here, e.g., update state, show a custom popup, etc.
     });
+
+    (window as any).addLocation = (x: number, y: number) => {
+      alert(`Location added: ${x}, ${y}`);
+      // Add your custom logic here to handle the location addition
+    };
 
     return () => {
       map.removeControl(searchControl as L.Control);

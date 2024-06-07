@@ -7,6 +7,7 @@ import { LatLngTuple } from "leaflet";
 import MapMarker from "./MapMarker";
 import { TripObject } from "../types/trip";
 import { DestinationObject } from "../types/destination";
+import "../styles/components/MapMarker.scss";
 
 type Props = {
   trip: TripObject;
