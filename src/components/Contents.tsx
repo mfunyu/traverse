@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useReducer } from "react";
 import { TripObject } from "../types/trip";
 import Map from "./Map";
 import Planner from "./Planner";
@@ -9,10 +9,11 @@ import { addDestination } from "../class/PlanController";
 
 
 function planReducer(plans: PlanObject[], action: any) {
+  const newPlans = action.plans.slice();
   switch (action.type) {
   case "add":
-    addDestination(plans, action.newDest);
-    return [...plans];
+    addDestination(newPlans, action.newDest);
+    return newPlans;
   case "remove":
     return plans.filter((plan) => plan !== action.plan);
   default:
@@ -25,7 +26,8 @@ function Contents({ trip }: { trip: TripObject }) {
   const [plans, dispatch] = useReducer(planReducer, trip.plans);
 
   function handleAddDestination(newDest: DestinationObject) {
-    dispatch({ type: "add", newDest: newDest });
+    dispatch({ type: "add", plans: plans, newDest: newDest });
+    console.log(plans);
   }
 
   return (

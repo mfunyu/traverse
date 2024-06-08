@@ -55,5 +55,6 @@ export function addDestination(plans: PlanObject[], destination: DestinationObje
     endDate = new Date(destination.arrivalDate.getTime() + (destination.lengthOfStay * 24 * 60 * 60 * 1000));
   }
   const plan = findPlanByDate(plans, destination.arrivalDate, endDate);
+  console.log("Adding destination", plans);
   plan.destinations.push(destination);
 }

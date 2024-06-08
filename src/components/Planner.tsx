@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
-import Modal from "./Modal";
 import { TripObject } from "../types/trip";
-import { PlanObject } from "../types/plan";
+import { PlansContext } from "./PlansContext";
 
 type Props = {
   trip: TripObject;
@@ -17,7 +16,8 @@ function isNotNextDay(date1: Date, date2: Date) {
   return dayDiff > 1;
 }
 
-function PlannerLists ({ trip }: Props) {
+function PlannerLists () {
+  const plans = useContext(PlansContext);
   let totalIndex = 1;
   let prevDate: Date | null = null;
   const [modalOpen, setModalOpen] = useState(true);
@@ -30,7 +30,7 @@ function PlannerLists ({ trip }: Props) {
     <>
       {/* {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>} */}
       <div className="lists">
-        {trip.plans.map((plan) => {
+        {plans.map((plan) => {
           const prevIndex = totalIndex;
           totalIndex += plan.destinations.length;
 
@@ -75,7 +75,7 @@ function Planner ({ trip }: Props) {
       <div className="planner">
         <div className="contents">
           <PlannerHeader trip={trip}/>
-          <PlannerLists trip={trip} />
+          <PlannerLists />
         </div>
       </div>
     </>
