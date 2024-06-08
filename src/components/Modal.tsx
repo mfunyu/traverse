@@ -111,8 +111,8 @@ export function AddModal({ latLng, label, onClose, addDestination }: Props1) {
         </span>
         <h2>{name}</h2>
         <p>{address}</p>
-        <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false}/>
         <InputField onChange={(e) => setArrivalDate(new Date(e.target.value))} label="Arrival date" placeholder="undefined" type="date" required={true}/>
+        <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false}/>
         <InputField onChange={(e) => setLengthOfStay(Number(e.target.value))} label="Length of stay" placeholder="0" type="number" required={false}/>
         <InputField onChange={(e) => setNotes(e.target.value)} label="Notes" placeholder="add notes" type="text" required={false}/>
         <div className="modal-footer">
