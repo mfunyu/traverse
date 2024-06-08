@@ -5,11 +5,11 @@ import Planner from "./Planner";
 import { DestinationObject } from "../types/destination";
 import { PlanObject } from "../types/plan";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
-import { addDestination } from "../class/PlanController";
+import { addDestination, deepCopyPlans } from "../class/PlanController";
 
 
 function planReducer(plans: PlanObject[], action: any) {
-  const newPlans = action.plans.slice();
+  const newPlans = deepCopyPlans(plans);
   switch (action.type) {
   case "add":
     addDestination(newPlans, action.newDest);
