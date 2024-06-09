@@ -88,7 +88,7 @@ export function AddModal({ latLng, label, onClose, addDestination }: Props1) {
   function handleSubmit () {
     console.log("submit");
     const newDest: DestinationObject = {
-      label: label,
+      label: label.split(",")[0],
       latLang: [latLng[0], latLng[1]],
       address: label,
       customLabel: customName,
