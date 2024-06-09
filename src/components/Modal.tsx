@@ -1,4 +1,5 @@
 import { ChangeEvent, useContext, useState } from "react";
+import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
 import { DestinationObject } from "../types/destination";
 import { PlansDispatchContext } from "./PlansContext";
@@ -89,15 +90,7 @@ export function AddModal({ latLng, label, onClose }: Props1) {
 
   function handleSubmit () {
     console.log("submit");
-    const newDest: DestinationObject = {
-      label: label.split(",")[0],
-      latLang: [latLng[0], latLng[1]],
-      address: label,
-      customLabel: customName,
-      arrivalDate: arrivalDate,
-      lengthOfStay: lengthOfStay,
-      notes: notes,
-    };
+    const newDest = new Destination(label, latLng, customName, arrivalDate, lengthOfStay, notes);
     dispatch({ type: "add", newDest: newDest });
     onClose();
   }
