@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import "../styles/components/Modal.scss";
 import { DestinationObject } from "../types/destination";
+import { PlansDispatchContext } from "./PlansContext";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -69,10 +70,9 @@ type Props1 = {
   latLng: number[];
   label: string;
   onClose: () => void;
-  addDestination: (newDest: DestinationObject) => void;
 }
 
-export function AddModal({ latLng, label, onClose, addDestination }: Props1) {
+export function AddModal({ latLng, label, onClose }: Props1) {
 /*   const [name, setName] = useState(destination.name);
   const [address, setAddress] = useState(destination.address);
   const handleSave = () => {
@@ -80,6 +80,8 @@ export function AddModal({ latLng, label, onClose, addDestination }: Props1) {
     onClose();
   };
   */
+  const dispatch = useContext(PlansDispatchContext);
+
   const [customName, setCustomName] = useState("");
   const [arrivalDate, setArrivalDate] = useState<Date>(new Date());
   const [lengthOfStay, setLengthOfStay] = useState(0);
@@ -96,7 +98,7 @@ export function AddModal({ latLng, label, onClose, addDestination }: Props1) {
       lengthOfStay: lengthOfStay,
       notes: notes,
     };
-    addDestination(newDest);
+    dispatch({ type: "add", newDest: newDest });
     onClose();
   }
 

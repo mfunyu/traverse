@@ -5,18 +5,13 @@ import SearchField from "./SearchField";
 import "../styles/components/SearchField.scss";
 import { LatLngTuple } from "leaflet";
 import MapMarker from "./MapMarker";
-import { TripObject } from "../types/trip";
 import { DestinationObject } from "../types/destination";
 import "../styles/components/MapMarker.scss";
 import { AddModal } from "./Modal";
 import { useContext, useState } from "react";
 import { PlansContext } from "./PlansContext";
 
-type Props = {
-  onAddDestination: (newDest: DestinationObject) => void;
-}
-
-function Map({ onAddDestination }: Props) {
+function Map() {
   const plans = useContext(PlansContext);
   const position: LatLngTuple = [51.505, -0.09];
   const allDests: DestinationObject[] = plans.reduce((acc: DestinationObject[], plan) => acc.concat(plan.destinations), []);
@@ -37,7 +32,7 @@ function Map({ onAddDestination }: Props) {
 
   return (
     <>
-      {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal} addDestination={onAddDestination}/>}
+      {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal}/>}
       <div className="map">
         <MapContainer
           center={position}
