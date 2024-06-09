@@ -7,7 +7,7 @@ import { PlanObject } from "../types/plan";
 
 type Props = {
   plan: PlanObject;
-  prevDate: Date | null;
+  prevDate: Date;
   prevIndex: number;
 }
 
@@ -19,24 +19,28 @@ function isNotNextDay(date1: Date, date2: Date) {
   return dayDiff > 1;
 }
 
-function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
-  let fillerComponent = null;
+function calcNdaysFromDate(date: Date, n: number) {
+  return new Date(date.getTime() + (n * 24 * 60 * 60 * 1000));
+}
 
-  if (prevDate && isNotNextDay(prevDate, plan.date)) {
-    const startDate = new Date(prevDate.getTime() + (24 * 60 * 60 * 1000));
-    const endDate = isNotNextDay(startDate, plan.date) ? new Date(plan.date.getTime() - (24 * 60 * 60 * 1000)) : null;
-    const emptyPlan = {
-      date: startDate,
-      endDate: endDate,
-      destinations: [],
-    };
-    fillerComponent = <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
-  }
+function PlannerFiller({ plan, prevDate, prevIndex }: Props) {
+  const startDate = calcNdaysFromDate(prevDate, 1);
+  const endDate = isNotNextDay(startDate, plan.date) ? calcNdaysFromDate(plan.date, -1) : null;
+  const emptyPlan = {
+    date: startDate,
+    endDate: endDate,
+    destinations: [],
+  };
+  return <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
+}
+
+function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
+  const isDisplayFiller = prevDate && isNotNextDay(prevDate, plan.date);
 
   return (
     <React.Fragment>
-      {fillerComponent}
-      <PlannerCard plan={plan} key="normal" index={prevIndex} />
+      {isDisplayFiller && <PlannerFiller key="empty" plan={plan} prevDate={prevDate} prevIndex={prevIndex} />}
+      <PlannerCard key="normal" plan={plan} index={prevIndex} />
     </React.Fragment>
   );
 }
@@ -44,7 +48,7 @@ function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
 function PlannerLists () {
   const plans = useContext(PlansContext);
   let prevIndex = 1;
-  let prevDate: Date | null = null;
+  let prevDate: Date;
   const [modalOpen, setModalOpen] = useState(true);
 
   function handleCloseModal() {
@@ -67,14 +71,6 @@ function PlannerLists () {
   );
 }
 
-function PlannerHeader({ tripName }: { tripName: string }) {
-  return (
-    <div className="header">
-      <h2>{tripName}</h2>
-    </div>
-  );
-}
-
 function Planner({ trip }: { trip: TripObject }) {
 
   console.log("Planner.tsx: trip", trip);
@@ -82,7 +78,9 @@ function Planner({ trip }: { trip: TripObject }) {
     <>
       <div className="planner">
         <div className="contents">
-          <PlannerHeader tripName={trip.label} />
+          <div className="header">
+            <h2>{trip.label}</h2>
+          </div>
           <PlannerLists />
         </div>
       </div>
