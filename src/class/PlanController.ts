@@ -44,8 +44,10 @@ function createPlan(plans: PlanObject[], date: Date, endDate: Date | null): Plan
 
 function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): PlanObject {
   const newDateInTime = Math.floor(date.getTime() / 1000);
+  const endDateInTime = endDate ? Math.floor(endDate.getTime() / 1000) : 0;
   for (const plan of plans) {
     const planDateInTime = Math.floor(plan.date.getTime() / 1000);
+    const planEndDateInTime = plan.endDate ? Math.floor(plan.endDate.getTime() / 1000) : 0;
     if (!endDate) {
       if (planDateInTime > newDateInTime) {
         console.log("Creating plan", plans);
@@ -55,18 +57,20 @@ function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): 
       } else if (planDateInTime === newDateInTime) {
         console.log("Returning plan", plans);
         return plan;
-      } else if (plan.endDate && plan.endDate.getTime() > newDateInTime) {
+      } else if (plan.endDate && planEndDateInTime > newDateInTime) {
+        console.log("plan.endDategetTime", planEndDateInTime);
+        console.log("newDateInTime", newDateInTime);
         throw new Error("Cannot add a plan that overlaps with an existing plan");
       }
     } else {
       if (planDateInTime > newDateInTime) {
-        if (planDateInTime >= endDate.getTime()) {
+        if (planDateInTime >= endDateInTime) {
           return createPlan(plans, date, endDate);
         } else {
           throw new Error("Cannot add a plan that overlaps with an existing plan");
         }
       }
-      if (plan.endDate && plan.endDate.getTime() > newDateInTime) {
+      if (plan.endDate && planEndDateInTime > newDateInTime) {
         throw new Error("Cannot add a plan that overlaps with an existing plan");
       }
     }
