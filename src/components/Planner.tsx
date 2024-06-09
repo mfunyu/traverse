@@ -13,10 +13,10 @@ type Props = {
 
 /* Time must be always 00:00:00, edit if adding time related features */
 function isNotNextDay(date1: Date, date2: Date) {
-  const timeDiff = date2.getTime() - date1.getTime();
-  const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const timeDiff = Math.floor(date2.getTime() / 1000) - Math.floor(date1.getTime() / 1000);
+  const oneDay = 60 * 60 * 24;
 
-  return dayDiff > 1;
+  return timeDiff > oneDay;
 }
 
 function calcNdaysFromDate(date: Date, n: number) {
