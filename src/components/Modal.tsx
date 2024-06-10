@@ -132,9 +132,12 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
           required={false} />
         {showError && <p className="error-message">Error: {errorMsg}</p>}
         <div className="modal-footer">
-          <button onClick={onClose} className="modal-button">
-            x cancel
-          </button>
+          {mode === "add" && <button onClick={onClose} className="modal-button">
+            - cancel
+          </button>}
+          {mode === "modify" && <button onClick={onClose} className="modal-button-delete">
+            x delete
+          </button>}
           <button onClick={handleSubmit} className="modal-button" type="submit">
             save
           </button>
