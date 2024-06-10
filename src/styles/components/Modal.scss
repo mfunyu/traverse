@@ -60,6 +60,16 @@ $border-radius: 4px;
       }
     }
 
+    .error-message {
+      color: base.$warning-color;
+      font-size: 1em;
+      margin: 1em;
+      padding: 0.5em;
+      border: 1px solid base.$warning-color;
+      border-radius: $border-radius;
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+
     .modal-footer {
       display: flex;
       justify-content: space-between;

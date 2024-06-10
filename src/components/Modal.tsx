@@ -118,7 +118,7 @@ export function AddModal({ latLng, label, onClose }: Props1) {
         <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false}/>
         <InputField onChange={(e) => setLengthOfStay(Number(e.target.value))} label="Length of stay" placeholder="0" type="number" required={false}/>
         <InputField onChange={(e) => setNotes(e.target.value)} label="Notes" placeholder="add notes" type="text" required={false}/>
-        {showError && <p>Error: Overlapping Date</p>}
+        {showError && <p className="error-message">Error: Overlapping Date</p>}
         <div className="modal-footer">
           <button onClick={onClose} className="modal-button">
             x cancel
