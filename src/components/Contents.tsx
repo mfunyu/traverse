@@ -14,7 +14,7 @@ function planReducer(plans: Plans, action: { type: string, newDest: Destination 
     newPlans.addDestination(action.newDest);
     return newPlans;
   case "modify":
-    //find the destination in the plans and modify it
+    newPlans.modifyDestination(action.newDest);
     return newPlans;
   case "replace":
     newPlans.replaceDestination(action.newDest);

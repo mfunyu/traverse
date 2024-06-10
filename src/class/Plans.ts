@@ -80,6 +80,16 @@ class Plans {
     plan.destinations.push(destination);
   }
 
+  modifyDestination(newDest: Destination) {
+    for (const plan of this.plans) {
+      const index = plan.destinations.findIndex((dest) => dest.id === newDest.id);
+      if (index !== -1) {
+        plan.destinations[index] = newDest;
+        break;
+      }
+    }
+  }
+
   removeDestination(id: string) {
     let emptyPlanIndex = -1;
     for (const plan of this.plans) {
