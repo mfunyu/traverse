@@ -1,28 +1,11 @@
-import { DestinationObject } from "../types/destination";
-import { PlanObject } from "../types/plan";
+import Plan from "../class/Plan";
+import Destination from "./Destination";
 
-function deepCopyPlan(plan: PlanObject): PlanObject {
-  function deepCopyDestination(destination: DestinationObject): DestinationObject {
-    return { ...destination };
-  }
-
-  const dateCopy = new Date(plan.date);
-  const endDateCopy = plan.endDate ? new Date(plan.endDate) : null;
-
-  const destinationsCopy = plan.destinations.map(deepCopyDestination);
-
-  return {
-    date: dateCopy,
-    endDate: endDateCopy,
-    destinations: destinationsCopy,
-  };
+export function deepCopyPlans(plans: Plan[]): Plan[] {
+  return plans.map(plan => plan.deepCopy());
 }
 
-export function deepCopyPlans(plans: PlanObject[]): PlanObject[] {
-  return plans.map(deepCopyPlan);
-}
-
-function sortPlans(a: PlanObject, b: PlanObject): number {
+function sortPlans(a: Plan, b: Plan): number {
   if (a.date.getTime() === b.date.getTime()) {
     if (a.endDate)
       return 1;
@@ -31,18 +14,14 @@ function sortPlans(a: PlanObject, b: PlanObject): number {
   return a.date.getTime() - b.date.getTime();
 }
 
-function createPlan(plans: PlanObject[], date: Date, endDate: Date | null): PlanObject {
-  const plan: PlanObject = {
-    date: date,
-    endDate: endDate,
-    destinations: [],
-  };
+function createPlan(plans: Plan[], date: Date, endDate: Date | null): Plan {
+  const plan: Plan = new Plan(date, endDate, []);
   plans.push(plan);
   plans.sort(sortPlans);
   return plan;
 }
 
-function checkPlan(plan: PlanObject, date: Date, endDate: Date | null): "create" | "overlap" | "exist" | "none" {
+function checkPlan(plan: Plan, date: Date, endDate: Date | null): "create" | "overlap" | "exist" | "none" {
   const newDateInTime = Math.floor(date.getTime() / 1000);
   const endDateInTime = endDate ? Math.floor(endDate.getTime() / 1000) : 0;
   const planDateInTime = Math.floor(plan.date.getTime() / 1000);
@@ -75,7 +54,7 @@ function checkPlan(plan: PlanObject, date: Date, endDate: Date | null): "create"
   return "none";
 }
 
-export function isValidDate(plans: PlanObject[], date: Date, lengthOfStay: number): boolean {
+export function isValidDate(plans: Plan[], date: Date, lengthOfStay: number): boolean {
   const endDate = lengthOfStay === 0 ? null : new Date(date.getTime() + (lengthOfStay * 24 * 60 * 60 * 1000));
   console.log("Checking date", plans, date, endDate);
   for (const plan of plans) {
@@ -87,7 +66,7 @@ export function isValidDate(plans: PlanObject[], date: Date, lengthOfStay: numbe
   return true;
 }
 
-function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): PlanObject {
+function findPlanByDate(plans: Plan[], date: Date, endDate: Date | null): Plan {
   for (const plan of plans) {
     const result = checkPlan(plan, date, endDate);
     if (result === "exist") {
@@ -103,7 +82,7 @@ function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): 
   return createPlan(plans, date, endDate);
 }
 
-export function addDestination(plans: PlanObject[], destination: DestinationObject) {
+export function addDestination(plans: Plan[], destination: Destination) {
   destination.arrivalDate.setHours(0, 0, 0);
   let endDate: Date | null = null;
   if (destination.lengthOfStay !== 0) {

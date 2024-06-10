@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import "../styles/components/PlannerCard.scss";
-import { DestinationObject } from "../types/destination";
-import { PlanObject } from "../types/plan";
+import Destination from "../class/Destination";
+import Plan from "../class/Plan";
 import Modal from "./Modal";
 import { PlansContext } from "./PlansContext";
 
 type Props = {
-  plan: PlanObject;
+  plan: Plan;
   index: number;
 }
 
 type ChildProps = {
-  dest: DestinationObject;
+  dest: Destination;
   index: number;
 }
 

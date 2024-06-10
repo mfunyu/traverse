@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
 import { TripObject } from "../types/trip";
 import { PlansContext } from "./PlansContext";
-import { PlanObject } from "../types/plan";
+import Plan from "../class/Plan";
 
 type Props = {
-  plan: PlanObject;
+  plan: Plan;
   prevDate: Date;
   prevIndex: number;
 }
@@ -26,11 +26,7 @@ function calcNdaysFromDate(date: Date, n: number) {
 function PlannerFiller({ plan, prevDate, prevIndex }: Props) {
   const startDate = calcNdaysFromDate(prevDate, 1);
   const endDate = isNotNextDay(startDate, plan.date) ? calcNdaysFromDate(plan.date, -1) : null;
-  const emptyPlan = {
-    date: startDate,
-    endDate: endDate,
-    destinations: [],
-  };
+  const emptyPlan = new Plan(startDate, endDate, []);
   return <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
 }
 

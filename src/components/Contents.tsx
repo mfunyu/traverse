@@ -2,12 +2,12 @@ import { useReducer } from "react";
 import { TripObject } from "../types/trip";
 import Map from "./Map";
 import Planner from "./Planner";
-import { PlanObject } from "../types/plan";
+import Plan from "../class/Plan";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
 import { addDestination, deepCopyPlans } from "../class/PlanController";
 
 
-function planReducer(plans: PlanObject[], action: any) {
+function planReducer(plans: Plan[], action: any) {
   const newPlans = deepCopyPlans(plans);
   switch (action.type) {
   case "add":
