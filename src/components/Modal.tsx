@@ -85,17 +85,24 @@ export function AddModal({ latLng, label, onClose }: Props1) {
   const dispatch = useContext(PlansDispatchContext);
   const plans = useContext(PlansContext);
   const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [customName, setCustomName] = useState("");
-  const [arrivalDate, setArrivalDate] = useState<Date>(new Date());
+  const [arrivalDate, setArrivalDate] = useState<Date | undefined>(undefined);
   const [lengthOfStay, setLengthOfStay] = useState(0);
   const [notes, setNotes] = useState("");
 
   function handleSubmit () {
     console.log("submit");
+    if (!arrivalDate) {
+      setShowError(true);
+      setErrorMsg("Arrival date is required");
+      return;
+    }
     const newDest = new Destination(label, latLng, customName, arrivalDate, lengthOfStay, notes);
     if (!isValidDate(plans, newDest.arrivalDate, newDest.lengthOfStay)) {
       setShowError(true);
+      setErrorMsg("Date overlaps with an existing plan");
       return;
     }
     setShowError(false);
@@ -118,7 +125,7 @@ export function AddModal({ latLng, label, onClose }: Props1) {
         <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false}/>
         <InputField onChange={(e) => setLengthOfStay(Number(e.target.value))} label="Length of stay" placeholder="0" type="number" required={false}/>
         <InputField onChange={(e) => setNotes(e.target.value)} label="Notes" placeholder="add notes" type="text" required={false}/>
-        {showError && <p className="error-message">Error: Overlapping Date</p>}
+        {showError && <p className="error-message">Error: {errorMsg}</p>}
         <div className="modal-footer">
           <button onClick={onClose} className="modal-button">
             x cancel
