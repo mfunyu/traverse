@@ -13,11 +13,11 @@ class Destination implements DestinationObject {
   lengthOfStay: number;
   notes: string | null;
 
-  constructor(label: string, latLng: number[] | LatLngTuple, customLabel: string | null, arrivalDate: Date, lengthOfStay: number, notes: string | null, id?: string) {
+  constructor(label: string, latLng: number[] | LatLngTuple, customLabel: string | null, arrivalDate: Date, lengthOfStay: number, notes: string | null, address?: string, id?: string) {
     this.id = id || uuidv4();
     this.label = label.split(",")[0];
     this.latLng = [latLng[0], latLng[1]];
-    this.address = label;
+    this.address = address || label;
     this.customLabel = customLabel;
     this.arrivalDate = arrivalDate;
     this.lengthOfStay = lengthOfStay;
@@ -25,7 +25,7 @@ class Destination implements DestinationObject {
   }
 
   deepCopy(): Destination {
-    const newDest = new Destination(this.label, this.latLng, this.customLabel, this.arrivalDate, this.lengthOfStay, this.notes, this.id);
+    const newDest = new Destination(this.label, this.latLng, this.customLabel, this.arrivalDate, this.lengthOfStay, this.notes, this.address, this.id);
     return newDest;
   }
 
