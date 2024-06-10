@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import "leaflet-geosearch/dist/geosearch.css";
 import { useMap } from "react-leaflet";
@@ -15,6 +15,7 @@ const escapeHTML = (str: string) => {
 function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number, label: string) => void }){
   console.log("SearchField");
   const provider = new OpenStreetMapProvider();
+  const [marker, setMarker] = useState<L.Marker | null>(null);
 
   const options = {
     notFoundMessage: "No results found",
@@ -42,8 +43,24 @@ function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number,
   useEffect(() => {
     map.addControl(searchControl as L.Control);
 
+    // Add an event listener for when a location is shown
+    map.on("geosearch/showlocation", (e: any) => {
+      // If there is an existing marker, remove it
+      if (marker) {
+        map.removeLayer(marker);
+      }
+      // Set the new marker
+      const newMarker = e.marker;
+      setMarker(newMarker);
+    });
+
     window.addLocation = (x: number, y: number, label:string) => {
       onAddLocation(x, y, label);
+      // Remove the marker placed by GeoSearch
+      if (marker) {
+        map.removeLayer(marker);
+        setMarker(null);
+      }
     };
 
     return () => {
