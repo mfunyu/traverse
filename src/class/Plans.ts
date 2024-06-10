@@ -28,12 +28,14 @@ class Plans {
     return new Plans(this.plans.map((plan) => plan.deepCopy()));
   }
 
-  isValidDate(date: Date, lengthOfStay: number): boolean {
+  isValidDate(date: Date, lengthOfStay: number, id: string): boolean {
     const endDate = lengthOfStay === -1 ? null : calcNdaysFromDate(date, lengthOfStay);
     console.log("Checking date", this.plans, date, endDate);
     for (const plan of this.plans) {
       const result = plan.checkPlan(date, endDate);
       if (result === "overlap") {
+        if (plan.destinations.length === 1 && plan.destinations[0].id === id)
+          continue;
         return false;
       }
     }
@@ -74,10 +76,10 @@ class Plans {
     plan.destinations.push(destination);
   }
 
-  removeDestination(destination: Destination) {
+  removeDestination(id: string) {
     let emptyPlanIndex = -1;
     for (const plan of this.plans) {
-      const index = plan.destinations.findIndex((dest: Destination) => dest.id === destination.id);
+      const index = plan.destinations.findIndex((dest) => dest.id === id);
       if (index !== -1) {
         plan.destinations.splice(index, 1);
         if (plan.destinations.length === 0) {

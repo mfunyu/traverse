@@ -60,23 +60,24 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
       setErrorMsg("Arrival date is required");
       return;
     }
-
     let newDest;
     if (mode === "add") {
       newDest = displayData;
     } else {
       newDest = Destination.deepCopy(displayData);
     }
+
+    if (!plans.isValidDate(arrivalDate, lengthOfStay, newDest.id)) {
+      setShowError(true);
+      setErrorMsg("Date overlaps with an existing plan");
+      return;
+    }
+
     newDest.customLabel = customName;
     newDest.arrivalDate = arrivalDate;
     newDest.lengthOfStay = lengthOfStay;
     newDest.notes = notes;
 
-    if (!plans.isValidDate(newDest.arrivalDate, newDest.lengthOfStay)) {
-      setShowError(true);
-      setErrorMsg("Date overlaps with an existing plan");
-      return;
-    }
     setShowError(false);
     if (mode === "modify") {
       dispatch({ type: "modify", newDest: newDest });
