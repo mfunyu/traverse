@@ -29,6 +29,7 @@ class Plans {
   }
 
   isValidDate(date: Date, lengthOfStay: number, id: string): boolean {
+    date.setHours(0, 0, 0);
     const endDate = lengthOfStay ? calcNdaysFromDate(date, lengthOfStay) : null;
     console.log("Checking date", this.plans, date, endDate);
     for (const plan of this.plans) {
