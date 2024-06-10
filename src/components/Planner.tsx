@@ -49,15 +49,9 @@ function PlannerLists () {
   const plans = useContext(PlansContext);
   let prevIndex = 1;
   let prevDate: Date;
-  const [modalOpen, setModalOpen] = useState(true);
-
-  function handleCloseModal() {
-    setModalOpen(false);
-  }
 
   return (
     <>
-      {/* {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>} */}
       <div className="lists">
         {plans.map((plan, index) => {
           const prevIndexSave = prevIndex;

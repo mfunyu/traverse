@@ -1,6 +1,9 @@
+import { useContext, useState } from "react";
 import "../styles/components/PlannerCard.scss";
 import { DestinationObject } from "../types/destination";
 import { PlanObject } from "../types/plan";
+import Modal from "./Modal";
+import { PlansContext } from "./PlansContext";
 
 type Props = {
   plan: PlanObject;
@@ -13,14 +16,27 @@ type ChildProps = {
 }
 
 function PlannerItem ({ dest, index }: ChildProps) {
+  const plans = useContext(PlansContext);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  function handleCloseModal() {
+    setModalOpen(false);
+  }
+  function handleClick() {
+    setModalOpen(true);
+  }
+
   return (
-    <div className="item">
-      <div className="circle-number">{index}</div>
-      <div className="details">
-        <h4>{dest.customLabel ? dest.customLabel : dest.label}</h4>
-        <p>{dest.address}</p>
+    <>
+      {modalOpen && <Modal dest={plans[0].destinations[0]} onClose={handleCloseModal} />}
+      <div className="item" onClick={handleClick}>
+        <div className="circle-number">{index}</div>
+        <div className="details">
+          <h4>{dest.customLabel ? dest.customLabel : dest.label}</h4>
+          <p>{dest.address}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
