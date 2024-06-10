@@ -42,40 +42,50 @@ function createPlan(plans: PlanObject[], date: Date, endDate: Date | null): Plan
   return plan;
 }
 
-function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): PlanObject {
+function checkOverlap(plan: PlanObject, date: Date, endDate: Date | null): "create" | "overlap" | "exist" | "none" {
   const newDateInTime = Math.floor(date.getTime() / 1000);
   const endDateInTime = endDate ? Math.floor(endDate.getTime() / 1000) : 0;
+  const planDateInTime = Math.floor(plan.date.getTime() / 1000);
+  const planEndDateInTime = plan.endDate ? Math.floor(plan.endDate.getTime() / 1000) : 0;
+  if (!endDate) {
+    if (planDateInTime > newDateInTime) {
+      return "create";
+    }
+    if (plan.endDate) {
+      if (planDateInTime == newDateInTime) {
+        return "create";
+      } else if (planEndDateInTime > newDateInTime) {
+        return "overlap";
+      }
+    } else if (planDateInTime === newDateInTime) {
+      return "exist";
+    }
+  } else {
+    if (planDateInTime > newDateInTime) {
+      if (planDateInTime >= endDateInTime) {
+        return "create";
+      } else {
+        return "overlap";
+      }
+    }
+    if (plan.endDate && planEndDateInTime > newDateInTime) {
+      return "overlap";
+    }
+  }
+  return "none";
+}
+
+function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): PlanObject {
   for (const plan of plans) {
-    const planDateInTime = Math.floor(plan.date.getTime() / 1000);
-    const planEndDateInTime = plan.endDate ? Math.floor(plan.endDate.getTime() / 1000) : 0;
-    if (!endDate) {
-      if (planDateInTime > newDateInTime) {
-        console.log("Creating plan", plans);
-        console.log("planDateInTime", planDateInTime);
-        console.log("newDateInTime", newDateInTime);
-        return createPlan(plans, date, endDate);
-      }
-      if (plan.endDate) {
-        if (planDateInTime == newDateInTime) {
-          return createPlan(plans, date, endDate);
-        } else if (planEndDateInTime > newDateInTime) {
-          throw new Error("Cannot add a plan that overlaps with an existing plan");
-        }
-      } else if (planDateInTime === newDateInTime) {
-        console.log("Returning plan", plans);
-        return plan;
-      }
-    } else {
-      if (planDateInTime > newDateInTime) {
-        if (planDateInTime >= endDateInTime) {
-          return createPlan(plans, date, endDate);
-        } else {
-          throw new Error("Cannot add a plan that overlaps with an existing plan");
-        }
-      }
-      if (plan.endDate && planEndDateInTime > newDateInTime) {
-        throw new Error("Cannot add a plan that overlaps with an existing plan");
-      }
+    const result = checkOverlap(plan, date, endDate);
+    if (result === "exist") {
+      return plan;
+    }
+    if (result === "create") {
+      return createPlan(plans, date, endDate);
+    }
+    if (result === "overlap") {
+      throw new Error("Overlapping plans");
     }
   }
   return createPlan(plans, date, endDate);
