@@ -1,6 +1,6 @@
-import { PlanObject } from "./plan";
+import Plans from "../class/Plans";
 
 export interface TripObject {
 	label: string;
-	plans: PlanObject[];
+	plans: Plans;
 }

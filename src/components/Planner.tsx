@@ -1,36 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
 import { TripObject } from "../types/trip";
 import { PlansContext } from "./PlansContext";
-import { PlanObject } from "../types/plan";
+import Plan from "../class/Plan";
+import { calcNdaysFromDate, isNotNextDay } from "../utils/dateUtils";
 
 type Props = {
-  plan: PlanObject;
+  plan: Plan;
   prevDate: Date;
   prevIndex: number;
-}
-
-/* Time must be always 00:00:00, edit if adding time related features */
-function isNotNextDay(date1: Date, date2: Date) {
-  const timeDiff = Math.floor(date2.getTime() / 1000) - Math.floor(date1.getTime() / 1000);
-  const oneDay = 60 * 60 * 24;
-
-  return timeDiff > oneDay;
-}
-
-function calcNdaysFromDate(date: Date, n: number) {
-  return new Date(date.getTime() + (n * 24 * 60 * 60 * 1000));
 }
 
 function PlannerFiller({ plan, prevDate, prevIndex }: Props) {
   const startDate = calcNdaysFromDate(prevDate, 1);
   const endDate = isNotNextDay(startDate, plan.date) ? calcNdaysFromDate(plan.date, -1) : null;
-  const emptyPlan = {
-    date: startDate,
-    endDate: endDate,
-    destinations: [],
-  };
+  const emptyPlan = new Plan(startDate, endDate, []);
   return <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
 }
 
@@ -49,17 +34,11 @@ function PlannerLists () {
   const plans = useContext(PlansContext);
   let prevIndex = 1;
   let prevDate: Date;
-  const [modalOpen, setModalOpen] = useState(true);
-
-  function handleCloseModal() {
-    setModalOpen(false);
-  }
 
   return (
     <>
-      {/* {modalOpen && <Modal dest={trip.planController.plans[0].destinations[0]} onClose={handleCloseModal}/>} */}
       <div className="lists">
-        {plans.map((plan, index) => {
+        {plans.plans.map((plan, index) => {
           const prevIndexSave = prevIndex;
           prevIndex += plan.destinations.length;
           const prevDateSave = prevDate;

@@ -2,19 +2,24 @@ import { useReducer } from "react";
 import { TripObject } from "../types/trip";
 import Map from "./Map";
 import Planner from "./Planner";
-import { PlanObject } from "../types/plan";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
-import { addDestination, deepCopyPlans } from "../class/PlanController";
+import Plans from "../class/Plans";
+import Destination from "../class/Destination";
 
 
-function planReducer(plans: PlanObject[], action: any) {
-  const newPlans = deepCopyPlans(plans);
+function planReducer(plans: Plans, action: { type: string, newDest: Destination }) {
+  const newPlans = plans.deepCopyPlans();
   switch (action.type) {
   case "add":
-    addDestination(newPlans, action.newDest);
+    newPlans.addDestination(action.newDest);
     return newPlans;
-  case "remove":
-    return plans.filter((plan) => plan !== action.plan);
+  case "modify":
+    newPlans.modifyDestination(action.newDest);
+    return newPlans;
+  case "replace":
+    newPlans.replaceDestination(action.newDest);
+    console.log(newPlans.allDestinations());
+    return newPlans;
   default:
     return plans;
   }

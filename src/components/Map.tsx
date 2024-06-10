@@ -14,8 +14,8 @@ import { PlansContext } from "./PlansContext";
 function Map() {
   const plans = useContext(PlansContext);
   const position: LatLngTuple = [51.505, -0.09];
-  const allDests: DestinationObject[] = plans.reduce((acc: DestinationObject[], plan) => acc.concat(plan.destinations), []);
-
+  const allDests: DestinationObject[] = plans.allDestinations();
+  
   const [modalOpen, setModalOpen] = useState(false);
   const [latLng, setLatLng] = useState([0, 0]);
   const [label, setLabel] = useState("");

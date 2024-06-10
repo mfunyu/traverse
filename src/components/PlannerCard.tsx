@@ -1,26 +1,40 @@
+import { useState } from "react";
 import "../styles/components/PlannerCard.scss";
-import { DestinationObject } from "../types/destination";
-import { PlanObject } from "../types/plan";
+import Destination from "../class/Destination";
+import Plan from "../class/Plan";
+import { ModificationModal } from "./Modal";
 
 type Props = {
-  plan: PlanObject;
+  plan: Plan;
   index: number;
 }
 
 type ChildProps = {
-  dest: DestinationObject;
+  dest: Destination;
   index: number;
 }
 
 function PlannerItem ({ dest, index }: ChildProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  function handleCloseModal() {
+    setModalOpen(false);
+  }
+  function handleClick() {
+    setModalOpen(true);
+  }
+
   return (
-    <div className="item">
-      <div className="circle-number">{index}</div>
-      <div className="details">
-        <h4>{dest.customLabel ? dest.customLabel : dest.label}</h4>
-        <p>{dest.address}</p>
+    <>
+      {modalOpen && <ModificationModal dest={dest} onClose={handleCloseModal} />}
+      <div className="item" onClick={handleClick}>
+        <div className="circle-number">{index}</div>
+        <div className="details">
+          <h4>{dest.customLabel ? dest.customLabel : dest.label}</h4>
+          <p>{dest.address}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
