@@ -15,7 +15,7 @@ function App() {
     new Destination("Lyon, 69100", [45.75, 4.85], null, now, 0, null),
   ]), new Plan(calcNdaysFromDate(now, 3), null, [
     new Destination("Marceille, 80 rue de la république, 59100", [51.505, -0.09], null, calcNdaysFromDate(now, 3), 0, null),
-    new Destination("Nice, 33 rue de la république, 34100", [43.7, 7.25], null, now, 0, null),
+    new Destination("Nice, 33 rue de la république, 34100", [43.7, 7.25], null, calcNdaysFromDate(now, 3), 0, null),
   ]), new Plan(calcNdaysFromDate(now, 3), calcNdaysFromDate(now, 6), [
     new Destination("Paris, 21 avenue des champs elysées, 75000", [48.85, 2.35], null, calcNdaysFromDate(now, 3), 3, "Say hi to the Eiffel Tower!"),
   ]), new Plan(calcNdaysFromDate(now, 8), calcNdaysFromDate(now, 9), [
