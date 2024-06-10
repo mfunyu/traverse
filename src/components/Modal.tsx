@@ -39,9 +39,10 @@ type ModalProps = {
   onClose: () => void;
   displayData: Destination;
   mode: "add" | "modify";
+  onDelete?: () => void;
 }
 
-function Modal({ onClose, displayData, mode }: ModalProps) {
+function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   const dispatch = useContext(PlansDispatchContext);
   const plans = useContext(PlansContext);
 
@@ -135,7 +136,7 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
           {mode === "add" && <button onClick={onClose} className="modal-button">
             - cancel
           </button>}
-          {mode === "modify" && <button onClick={onClose} className="modal-button-delete">
+          {mode === "modify" && <button onClick={onDelete} className="modal-button-delete">
             x delete
           </button>}
           <button onClick={handleSubmit} className="modal-button" type="submit">
@@ -154,8 +155,13 @@ type Props1 = {
 }
 
 export function ModificationModal ({ dest, onClose }: Props) {
-  console.log(dest.arrivalDate);
-  return <Modal mode="modify" onClose={onClose} displayData={dest} />;
+  const dispatch = useContext(PlansDispatchContext);
+
+  function handleDelete() {
+    dispatch({ type: "delete", newDest: dest });
+    onClose();
+  }
+  return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete}/>;
 }
 
 export function AddModal({ latLng, label, onClose }: Props1) {

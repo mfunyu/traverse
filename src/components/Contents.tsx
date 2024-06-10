@@ -20,6 +20,9 @@ function planReducer(plans: Plans, action: { type: string, newDest: Destination 
     newPlans.replaceDestination(action.newDest);
     console.log(newPlans.allDestinations());
     return newPlans;
+  case "delete":
+    newPlans.deleteDestination(action.newDest.id);
+    return newPlans;
   default:
     return plans;
   }

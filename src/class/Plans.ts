@@ -90,7 +90,7 @@ class Plans {
     }
   }
 
-  removeDestination(id: string) {
+  deleteDestination(id: string) {
     let emptyPlanIndex = -1;
     for (const plan of this.plans) {
       const index = plan.destinations.findIndex((dest) => dest.id === id);
@@ -109,7 +109,7 @@ class Plans {
   }
 
   replaceDestination(newDest: Destination) {
-    this.removeDestination(newDest.id);
+    this.deleteDestination(newDest.id);
     this.addDestination(newDest);
   }
 }
