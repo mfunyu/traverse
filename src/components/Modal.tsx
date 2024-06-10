@@ -80,7 +80,12 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
 
     setShowError(false);
     if (mode === "modify") {
-      dispatch({ type: "modify", newDest: newDest });
+      if (newDest.arrivalDate !== displayData.arrivalDate ||
+        newDest.lengthOfStay !== displayData.lengthOfStay) {
+        dispatch({ type: "replace", newDest: newDest });
+      } else {
+        dispatch({ type: "modify", newDest: newDest });
+      }
     } else if (mode === "add") {
       dispatch({ type: "add", newDest: newDest });
     }

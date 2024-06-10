@@ -14,8 +14,11 @@ function planReducer(plans: Plans, action: { type: string, newDest: Destination 
     newPlans.addDestination(action.newDest);
     return newPlans;
   case "modify":
-    newPlans.removeDestination(action.newDest.id);
-    newPlans.addDestination(action.newDest);
+    //find the destination in the plans and modify it
+    return newPlans;
+  case "replace":
+    newPlans.replaceDestination(action.newDest);
+    console.log(newPlans.allDestinations());
     return newPlans;
   default:
     return plans;

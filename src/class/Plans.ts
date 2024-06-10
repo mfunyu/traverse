@@ -96,6 +96,11 @@ class Plans {
     }
     console.log("Removed destination", this.plans);
   }
+
+  replaceDestination(newDest: Destination) {
+    this.removeDestination(newDest.id);
+    this.addDestination(newDest);
+  }
 }
 
 export default Plans;
