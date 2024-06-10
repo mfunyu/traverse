@@ -1,27 +1,40 @@
+import { ChangeEvent, useContext, useState } from "react";
+import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
+import { DestinationObject } from "../types/destination";
+import { PlansContext, PlansDispatchContext } from "./PlansContext";
+import { isValidDate } from "../class/PlanController";
 
-type Props = {
+type InputFieldProps = {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
   label: string;
   placeholder: string;
   type: string;
+  required: boolean;
 }
 
-function InputField({ label, placeholder, type }: Props) {
+type Props = {
+  dest: DestinationObject;
+  onClose: () => void;
+}
+
+function InputField({ onChange, label, placeholder, type, required = false }: InputFieldProps) {
+
   return (
     <div className="input-field">
       <h4 className="label">{label}</h4>
       <input
-        /* value={name}
-        onChange={(e) => setName(e.target.value)} */
+        onChange={onChange}
         placeholder={placeholder}
         type={type}
         min="0"
+        required={required}
       />
     </div>
   );
 }
 
-function Modal() {
+function Modal({ dest, onClose }: Props) {
 /*   const [name, setName] = useState(destination.name);
   const [address, setAddress] = useState(destination.address);
 
@@ -33,17 +46,17 @@ function Modal() {
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close-button"/*  onClick={onClose} */>
+        <span className="close-button" onClick={onClose}>
           &times;
         </span>
-        <h2>Lyon</h2>
-        <p>69100, 60 Rue Marceille</p>
-        <InputField label="Display name" placeholder="Lyon" type="text"/>
-        <InputField label="Arrival date" placeholder="undefined" type="date"/>
-        <InputField label="Length of stay" placeholder="0" type="number"/>
-        <InputField label="Notes" placeholder="add notes" type="text"/>
-        <div className="modal-footer">
-          <button /* onClick={onClose} */ className="modal-button">
+        <h2>{dest.label}</h2>
+        <p>{dest.address}</p>
+        {/* <InputField label="Display name" placeholder="Lyon" type="text" required={false}/>
+        <InputField label="Arrival date" placeholder="undefined" type="date" required={true}/>
+        <InputField label="Length of stay" placeholder="0" type="number" required={false}/>
+        <InputField label="Notes" placeholder="add notes" type="text" required={false}/>
+       */}  <div className="modal-footer">
+          <button onClick={onClose} className="modal-button">
             x remove destination
           </button>
           <button /* onClick={handleSave} */ className="modal-button">
@@ -54,5 +67,78 @@ function Modal() {
     </div>
   );
 }
+
+type Props1 = {
+  latLng: number[];
+  label: string;
+  onClose: () => void;
+}
+
+export function AddModal({ latLng, label, onClose }: Props1) {
+/*   const [name, setName] = useState(destination.name);
+  const [address, setAddress] = useState(destination.address);
+  const handleSave = () => {
+    onSave({ ...destination, name, address });
+    onClose();
+  };
+  */
+  const dispatch = useContext(PlansDispatchContext);
+  const plans = useContext(PlansContext);
+  const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const [customName, setCustomName] = useState("");
+  const [arrivalDate, setArrivalDate] = useState<Date | undefined>(undefined);
+  const [lengthOfStay, setLengthOfStay] = useState(0);
+  const [notes, setNotes] = useState("");
+
+  function handleSubmit () {
+    console.log("submit");
+    if (!arrivalDate) {
+      setShowError(true);
+      setErrorMsg("Arrival date is required");
+      return;
+    }
+    const newDest = new Destination(label, latLng, customName, arrivalDate, lengthOfStay, notes);
+    if (!isValidDate(plans, newDest.arrivalDate, newDest.lengthOfStay)) {
+      setShowError(true);
+      setErrorMsg("Date overlaps with an existing plan");
+      return;
+    }
+    setShowError(false);
+    dispatch({ type: "add", newDest: newDest });
+    onClose();
+  }
+
+  const name = label.split(",")[0];
+  const address = label;
+
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close-button" onClick={onClose}>
+          &times;
+        </span>
+        <h2>{name}</h2>
+        <p>{address}</p>
+        <InputField onChange={(e) => setArrivalDate(new Date(e.target.value))} label="Arrival date" placeholder="undefined" type="date" required={true}/>
+        <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false}/>
+        <InputField onChange={(e) => setLengthOfStay(Number(e.target.value))} label="Length of stay" placeholder="0" type="number" required={false}/>
+        <InputField onChange={(e) => setNotes(e.target.value)} label="Notes" placeholder="add notes" type="text" required={false}/>
+        {showError && <p className="error-message">Error: {errorMsg}</p>}
+        <div className="modal-footer">
+          <button onClick={onClose} className="modal-button">
+            x cancel
+          </button>
+          <button onClick={handleSubmit} className="modal-button" type="submit">
+            save
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 
 export default Modal;
