@@ -4,23 +4,12 @@ import PlannerCard from "./PlannerCard";
 import { TripObject } from "../types/trip";
 import { PlansContext } from "./PlansContext";
 import Plan from "../class/Plan";
+import { calcNdaysFromDate, isNotNextDay } from "../utils/dateUtils";
 
 type Props = {
   plan: Plan;
   prevDate: Date;
   prevIndex: number;
-}
-
-/* Time must be always 00:00:00, edit if adding time related features */
-function isNotNextDay(date1: Date, date2: Date) {
-  const timeDiff = Math.floor(date2.getTime() / 1000) - Math.floor(date1.getTime() / 1000);
-  const oneDay = 60 * 60 * 24;
-
-  return timeDiff > oneDay;
-}
-
-function calcNdaysFromDate(date: Date, n: number) {
-  return new Date(date.getTime() + (n * 24 * 60 * 60 * 1000));
 }
 
 function PlannerFiller({ plan, prevDate, prevIndex }: Props) {

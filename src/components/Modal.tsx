@@ -3,6 +3,7 @@ import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
 import { DestinationObject } from "../types/destination";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
+import { getLocalDateString } from "../utils/dateUtils";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -75,6 +76,10 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
     onClose();
   }
 
+  console.log(displayData.arrivalDate?.toISOString());
+  console.log(arrivalDate?.toISOString().split("T")[0]);
+  const dateValue = arrivalDate ? getLocalDateString(arrivalDate) : "";
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -85,7 +90,7 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
         <p>{displayData.address}</p>
         <InputField
           onChange={(e) => setArrivalDate(new Date(e.target.value))}
-          value={arrivalDate ? arrivalDate.toISOString().split("T")[0] : ""}
+          value={dateValue}
           label="Arrival date"
           placeholder="undefined"
           type="date"
@@ -132,6 +137,7 @@ type Props1 = {
 }
 
 export function ModificationModal ({ dest, onClose }: Props) {
+  console.log(dest.arrivalDate);
   return <Modal mode="modify" onClose={onClose} displayData={dest} />;
 }
 
