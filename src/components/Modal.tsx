@@ -1,7 +1,6 @@
 import { ChangeEvent, useContext, useState } from "react";
 import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
-import { DestinationObject } from "../types/destination";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
 import { getLocalDateString } from "../utils/dateUtils";
 
@@ -15,7 +14,7 @@ type InputFieldProps = {
 }
 
 type Props = {
-  dest: DestinationObject;
+  dest: Destination;
   onClose: () => void;
 }
 
@@ -38,7 +37,7 @@ function InputField({ onChange, value, label, placeholder, type, required = fals
 
 type ModalProps = {
   onClose: () => void;
-  displayData: DestinationObject;
+  displayData: Destination;
   mode: "add" | "modify";
 }
 
@@ -61,7 +60,18 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
       setErrorMsg("Arrival date is required");
       return;
     }
-    const newDest = new Destination(displayData.label, displayData.latLng, customName, arrivalDate, lengthOfStay, notes);
+
+    let newDest;
+    if (mode === "add") {
+      newDest = displayData;
+    } else {
+      newDest = Destination.deepCopy(displayData);
+    }
+    newDest.customLabel = customName;
+    newDest.arrivalDate = arrivalDate;
+    newDest.lengthOfStay = lengthOfStay;
+    newDest.notes = notes;
+
     if (!plans.isValidDate(newDest.arrivalDate, newDest.lengthOfStay)) {
       setShowError(true);
       setErrorMsg("Date overlaps with an existing plan");
@@ -69,15 +79,13 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
     }
     setShowError(false);
     if (mode === "modify") {
-      dispatch({ type: "modify", dest: newDest });
+      dispatch({ type: "modify", newDest: newDest });
     } else if (mode === "add") {
       dispatch({ type: "add", newDest: newDest });
     }
     onClose();
   }
 
-  console.log(displayData.arrivalDate?.toISOString());
-  console.log(arrivalDate?.toISOString().split("T")[0]);
   const dateValue = arrivalDate ? getLocalDateString(arrivalDate) : "";
 
   return (
@@ -142,15 +150,7 @@ export function ModificationModal ({ dest, onClose }: Props) {
 }
 
 export function AddModal({ latLng, label, onClose }: Props1) {
-  const displayData: DestinationObject = {
-    label: label.split(",")[0],
-    latLng: [latLng[0], latLng[1]],
-    address: label,
-    customLabel: "",
-    arrivalDate: null,
-    lengthOfStay: 0,
-    notes: "",
-  };
+  const displayData = new Destination(label, latLng, "", new Date(), 0, "");
 
   return <Modal mode="add" onClose={onClose} displayData={displayData} />;
 }

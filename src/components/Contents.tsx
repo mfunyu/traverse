@@ -4,15 +4,17 @@ import Map from "./Map";
 import Planner from "./Planner";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
 import Plans from "../class/Plans";
+import Destination from "../class/Destination";
 
 
-function planReducer(plans: Plans, action: any) {
+function planReducer(plans: Plans, action: { type: string, newDest: Destination }) {
   const newPlans = plans.deepCopyPlans();
   switch (action.type) {
   case "add":
     newPlans.addDestination(action.newDest);
     return newPlans;
   case "modify":
+    newPlans.removeDestination(action.newDest);
     return newPlans;
   default:
     return plans;

@@ -72,6 +72,26 @@ class Plans {
     console.log("Adding destination", this.plans);
     plan.destinations.push(destination);
   }
+
+  removeDestination(destination: Destination) {
+    let emptyPlanIndex = -1;
+    for (const plan of this.plans) {
+      const index = plan.destinations.findIndex((dest: Destination) => { console.log(dest.id, destination?.id);
+        return dest.id === destination.id;
+      });
+      if (index !== -1) {
+        plan.destinations.splice(index, 1);
+        if (plan.destinations.length === 0) {
+          emptyPlanIndex = this.plans.indexOf(plan);
+        }
+        break;
+      }
+    }
+    if (emptyPlanIndex !== -1) {
+      this.plans.splice(emptyPlanIndex, 1);
+    }
+    console.log("Removed destination", this.plans);
+  }
 }
 
 export default Plans;
