@@ -6,7 +6,7 @@ export interface DestinationObject {
   address: string;
 
   customLabel: string | null;
-  arrivalDate: Date;
+  arrivalDate: Date | null;
   lengthOfStay: number;
   notes: string | null;
 }

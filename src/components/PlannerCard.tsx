@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "../styles/components/PlannerCard.scss";
 import Destination from "../class/Destination";
 import Plan from "../class/Plan";
-import Modal from "./Modal";
-import { PlansContext } from "./PlansContext";
+import { ModificationModal } from "./Modal";
 
 type Props = {
   plan: Plan;
@@ -16,7 +15,6 @@ type ChildProps = {
 }
 
 function PlannerItem ({ dest, index }: ChildProps) {
-  const plans = useContext(PlansContext);
   const [modalOpen, setModalOpen] = useState(false);
 
   function handleCloseModal() {
@@ -28,7 +26,7 @@ function PlannerItem ({ dest, index }: ChildProps) {
 
   return (
     <>
-      {modalOpen && <Modal dest={plans[0].destinations[0]} onClose={handleCloseModal} />}
+      {modalOpen && <ModificationModal dest={dest} onClose={handleCloseModal} />}
       <div className="item" onClick={handleClick}>
         <div className="circle-number">{index}</div>
         <div className="details">
