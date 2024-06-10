@@ -1,3 +1,4 @@
+import { calcNdaysFromDate } from "../utils/dateUtils";
 import Destination from "./Destination";
 import Plan from "./Plan";
 
@@ -28,7 +29,7 @@ class Plans {
   }
 
   isValidDate(date: Date, lengthOfStay: number): boolean {
-    const endDate = lengthOfStay === -1 ? null : new Date(date.getTime() + (lengthOfStay * 24 * 60 * 60 * 1000));
+    const endDate = lengthOfStay === -1 ? null : calcNdaysFromDate(date, lengthOfStay);
     console.log("Checking date", this.plans, date, endDate);
     for (const plan of this.plans) {
       const result = plan.checkPlan(date, endDate);
@@ -66,7 +67,7 @@ class Plans {
     destination.arrivalDate.setHours(0, 0, 0);
     let endDate: Date | null = null;
     if (destination.lengthOfStay !== 0) {
-      endDate = new Date(destination.arrivalDate.getTime() + (destination.lengthOfStay * 24 * 60 * 60 * 1000));
+      endDate = calcNdaysFromDate(destination.arrivalDate, destination.lengthOfStay);
     }
     const plan = this.findPlanByDate(destination.arrivalDate, endDate);
     console.log("Adding destination", this.plans);
@@ -76,9 +77,7 @@ class Plans {
   removeDestination(destination: Destination) {
     let emptyPlanIndex = -1;
     for (const plan of this.plans) {
-      const index = plan.destinations.findIndex((dest: Destination) => { console.log(dest.id, destination?.id);
-        return dest.id === destination.id;
-      });
+      const index = plan.destinations.findIndex((dest: Destination) => dest.id === destination.id);
       if (index !== -1) {
         plan.destinations.splice(index, 1);
         if (plan.destinations.length === 0) {
