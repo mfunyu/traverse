@@ -11,6 +11,7 @@ type InputFieldProps = {
   placeholder: string;
   type: string;
   required: boolean;
+  value: string;
 }
 
 type Props = {
@@ -18,7 +19,7 @@ type Props = {
   onClose: () => void;
 }
 
-function InputField({ onChange, label, placeholder, type, required = false }: InputFieldProps) {
+function InputField({ onChange, value, label, placeholder, type, required = false }: InputFieldProps) {
 
   return (
     <div className="input-field">
@@ -29,6 +30,7 @@ function InputField({ onChange, label, placeholder, type, required = false }: In
         type={type}
         min="0"
         required={required}
+        value={value}
       />
     </div>
   );
@@ -82,10 +84,34 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
         </span>
         <h2>{displayData.label}</h2>
         <p>{displayData.address}</p>
-        <InputField onChange={(e) => setArrivalDate(new Date(e.target.value))} label="Arrival date" placeholder="undefined" type="date" required={true} />
-        <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false} />
-        <InputField onChange={(e) => setLengthOfStay(Number(e.target.value))} label="Length of stay" placeholder="0" type="number" required={false} />
-        <InputField onChange={(e) => setNotes(e.target.value)} label="Notes" placeholder="add notes" type="text" required={false} />
+        <InputField
+          onChange={(e) => setArrivalDate(new Date(e.target.value))}
+          value={arrivalDate ? arrivalDate.toISOString().split("T")[0] : ""}
+          label="Arrival date"
+          placeholder="undefined"
+          type="date"
+          required={true} />
+        <InputField
+          onChange={(e) => setCustomName(e.target.value)}
+          value={customName ? customName : ""}
+          label="Custom name"
+          placeholder="Lyon"
+          type="text"
+          required={false} />
+        <InputField
+          onChange={(e) => setLengthOfStay(Number(e.target.value))}
+          value={lengthOfStay.toString()}
+          label="Length of stay"
+          placeholder="0"
+          type="number"
+          required={false} />
+        <InputField
+          onChange={(e) => setNotes(e.target.value)}
+          value={notes ? notes : ""}
+          label="Notes"
+          placeholder="add notes"
+          type="text"
+          required={false} />
         {showError && <p className="error-message">Error: {errorMsg}</p>}
         <div className="modal-footer">
           <button onClick={onClose} className="modal-button">
