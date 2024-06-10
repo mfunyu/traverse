@@ -13,7 +13,7 @@ function App() {
     endDate: null,
     destinations: [{
       label: "Lyon",
-      latLang: [45.75, 4.85],
+      latLng: [45.75, 4.85],
       address: "69100",
       customLabel: null,
       arrivalDate: now,
@@ -26,7 +26,7 @@ function App() {
     endDate: null,
     destinations: [{
       label: "Marceille",
-      latLang: [51.505, -0.09],
+      latLng: [51.505, -0.09],
       address: "80 rue de la république, 59100",
       customLabel: null,
       arrivalDate: now,
@@ -35,7 +35,7 @@ function App() {
     },
     {
       label: "Nice",
-      latLang: [43.7, 7.25],
+      latLng: [43.7, 7.25],
       address: "33 rue de la république, 34100",
       customLabel: null,
       arrivalDate: now,
@@ -48,7 +48,7 @@ function App() {
     endDate: new Date(now.getTime() + (6 * 24 * 60 * 60 * 1000)),
     destinations: [{
       label: "Paris",
-      latLang: [48.85, 2.35],
+      latLng: [48.85, 2.35],
       address: "21 avenue des champs elysées, 75000",
       customLabel: null,
       arrivalDate: now,
@@ -61,7 +61,7 @@ function App() {
     endDate: new Date(now.getTime() + (9 * 24 * 60 * 60 * 1000)),
     destinations: [{
       label: "Paris2",
-      latLang: [51.505, -0.09],
+      latLng: [51.505, -0.09],
       address: "21 avenue des champs elysées, 75000",
       customLabel: null,
       arrivalDate: now,

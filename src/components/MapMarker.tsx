@@ -1,5 +1,4 @@
 import { Marker, Popup } from "react-leaflet";
-import { LatLngTuple } from "leaflet";
 import "../styles/components/MapMarker.scss";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
@@ -41,7 +40,7 @@ function MarkerInRoute({ dest, index }: Props) {
 function MapMarker({ dest, index }: Props) {
 
   return (
-    <Marker position={dest.latLang} >
+    <Marker position={dest.latLng} >
       <Popup>
         <MarkerInRoute dest={dest} index={index}/>
       </Popup>

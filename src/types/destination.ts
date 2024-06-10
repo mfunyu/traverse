@@ -2,7 +2,7 @@ import { LatLngTuple } from "leaflet";
 
 export interface DestinationObject {
   label: string;
-  latLang: LatLngTuple;
+  latLng: LatLngTuple;
   address: string;
 
   customLabel: string | null;
