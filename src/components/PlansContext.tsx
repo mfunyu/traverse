@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import Plan from "../class/Plan";
+import Plans from "../class/Plans";
 
-export const PlansContext = createContext<Plan[]>([]);
+export const PlansContext = createContext<Plans>(new Plans([]));
 //@ts-ignore
 export const PlansDispatchContext = createContext<React.Dispatch<any>>(null);

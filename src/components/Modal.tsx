@@ -3,7 +3,6 @@ import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
 import { DestinationObject } from "../types/destination";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
-import { isValidDate } from "../class/PlanController";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -62,7 +61,7 @@ function Modal({ onClose, displayData, mode }: ModalProps) {
       return;
     }
     const newDest = new Destination(displayData.label, displayData.latLng, customName, arrivalDate, lengthOfStay, notes);
-    if (!isValidDate(plans, newDest.arrivalDate, newDest.lengthOfStay)) {
+    if (!plans.isValidDate(newDest.arrivalDate, newDest.lengthOfStay)) {
       setShowError(true);
       setErrorMsg("Date overlaps with an existing plan");
       return;

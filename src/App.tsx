@@ -5,6 +5,7 @@ import Plan from "./class/Plan";
 import { TripObject } from "./types/trip";
 import Contents from "./components/Contents";
 import Destination from "./class/Destination";
+import Plans from "./class/Plans";
 
 function App() {
   const now = new Date();
@@ -23,7 +24,7 @@ function App() {
 
   const trips: TripObject[] = [{
     label: "Trip to Paris!",
-    plans: planData,
+    plans: new Plans(planData),
   }];
 
   return (

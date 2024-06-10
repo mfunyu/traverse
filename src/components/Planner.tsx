@@ -49,7 +49,7 @@ function PlannerLists () {
   return (
     <>
       <div className="lists">
-        {plans.map((plan, index) => {
+        {plans.plans.map((plan, index) => {
           const prevIndexSave = prevIndex;
           prevIndex += plan.destinations.length;
           const prevDateSave = prevDate;
