@@ -29,7 +29,7 @@ class Plans {
   }
 
   isValidDate(date: Date, lengthOfStay: number, id: string): boolean {
-    const endDate = lengthOfStay === -1 ? null : calcNdaysFromDate(date, lengthOfStay);
+    const endDate = lengthOfStay ? calcNdaysFromDate(date, lengthOfStay) : null;
     console.log("Checking date", this.plans, date, endDate);
     for (const plan of this.plans) {
       const result = plan.checkPlan(date, endDate);
@@ -37,6 +37,9 @@ class Plans {
         if (plan.destinations.length === 1 && plan.destinations[0].id === id)
           continue;
         return false;
+      }
+      if (result === "exist" || result === "create") {
+        return true;
       }
     }
     return true;
