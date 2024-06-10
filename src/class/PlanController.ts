@@ -42,7 +42,7 @@ function createPlan(plans: PlanObject[], date: Date, endDate: Date | null): Plan
   return plan;
 }
 
-function checkOverlap(plan: PlanObject, date: Date, endDate: Date | null): "create" | "overlap" | "exist" | "none" {
+function checkPlan(plan: PlanObject, date: Date, endDate: Date | null): "create" | "overlap" | "exist" | "none" {
   const newDateInTime = Math.floor(date.getTime() / 1000);
   const endDateInTime = endDate ? Math.floor(endDate.getTime() / 1000) : 0;
   const planDateInTime = Math.floor(plan.date.getTime() / 1000);
@@ -75,9 +75,21 @@ function checkOverlap(plan: PlanObject, date: Date, endDate: Date | null): "crea
   return "none";
 }
 
+export function isValidDate(plans: PlanObject[], date: Date, lengthOfStay: number): boolean {
+  const endDate = lengthOfStay === 0 ? null : new Date(date.getTime() + (lengthOfStay * 24 * 60 * 60 * 1000));
+  console.log("Checking date", plans, date, endDate);
+  for (const plan of plans) {
+    const result = checkPlan(plan, date, endDate);
+    if (result === "overlap") {
+      return false;
+    }
+  }
+  return true;
+}
+
 function findPlanByDate(plans: PlanObject[], date: Date, endDate: Date | null): PlanObject {
   for (const plan of plans) {
-    const result = checkOverlap(plan, date, endDate);
+    const result = checkPlan(plan, date, endDate);
     if (result === "exist") {
       return plan;
     }

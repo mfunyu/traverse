@@ -2,7 +2,8 @@ import { ChangeEvent, useContext, useState } from "react";
 import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
 import { DestinationObject } from "../types/destination";
-import { PlansDispatchContext } from "./PlansContext";
+import { PlansContext, PlansDispatchContext } from "./PlansContext";
+import { isValidDate } from "../class/PlanController";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -82,6 +83,8 @@ export function AddModal({ latLng, label, onClose }: Props1) {
   };
   */
   const dispatch = useContext(PlansDispatchContext);
+  const plans = useContext(PlansContext);
+  const [showError, setShowError] = useState(false);
 
   const [customName, setCustomName] = useState("");
   const [arrivalDate, setArrivalDate] = useState<Date>(new Date());
@@ -91,6 +94,11 @@ export function AddModal({ latLng, label, onClose }: Props1) {
   function handleSubmit () {
     console.log("submit");
     const newDest = new Destination(label, latLng, customName, arrivalDate, lengthOfStay, notes);
+    if (!isValidDate(plans, newDest.arrivalDate, newDest.lengthOfStay)) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
     dispatch({ type: "add", newDest: newDest });
     onClose();
   }
@@ -110,6 +118,7 @@ export function AddModal({ latLng, label, onClose }: Props1) {
         <InputField onChange={(e) => setCustomName(e.target.value)} label="Custom name" placeholder="Lyon" type="text" required={false}/>
         <InputField onChange={(e) => setLengthOfStay(Number(e.target.value))} label="Length of stay" placeholder="0" type="number" required={false}/>
         <InputField onChange={(e) => setNotes(e.target.value)} label="Notes" placeholder="add notes" type="text" required={false}/>
+        {showError && <p>Error: Overlapping Date</p>}
         <div className="modal-footer">
           <button onClick={onClose} className="modal-button">
             x cancel
