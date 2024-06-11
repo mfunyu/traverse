@@ -13,7 +13,7 @@ class Plan implements PlanObject {
   }
 
   static fromJSON(json: PlanObject): Plan {
-    return new Plan(new Date(json.date), json.endDate ? new Date(json.endDate) : null, json.destinations.map((dest: any) => Destination.fromJSON(dest)));
+    return new Plan(new Date(json.date), json.endDate ? new Date(json.endDate) : null, json.destinations.map((dest) => Destination.fromJSON(dest)));
   }
 
   deepCopy(): Plan {

@@ -1,5 +1,3 @@
-import React from "react";
-import NavigationBar from "./components/NavigationBar";
 import "./styles/App.scss";
 import Plan from "./class/Plan";
 import { TripObject } from "./types/trip";

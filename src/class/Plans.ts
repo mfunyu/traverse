@@ -1,4 +1,3 @@
-import { PlanObject } from "../types/plan";
 import { calcNdaysFromDate } from "../utils/dateUtils";
 import Destination from "./Destination";
 import Plan from "./Plan";
