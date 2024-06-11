@@ -24,6 +24,12 @@ class Destination implements DestinationObject {
     this.notes = notes;
   }
 
+  static fromJSON(json: DestinationObject): Destination {
+    if (!json.arrivalDate)
+      throw new Error("arrivalDate is undefined");
+    return new Destination(json.label, json.latLng, json.customLabel, new Date(json.arrivalDate), json.lengthOfStay, json.notes, json.address, json.id);
+  }
+
   deepCopy(): Destination {
     const newDest = new Destination(this.label, this.latLng, this.customLabel, this.arrivalDate, this.lengthOfStay, this.notes, this.address, this.id);
     return newDest;

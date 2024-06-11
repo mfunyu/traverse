@@ -1,3 +1,4 @@
+import { PlanObject } from "../types/plan";
 import { calcNdaysFromDate } from "../utils/dateUtils";
 import Destination from "./Destination";
 import Plan from "./Plan";
@@ -16,6 +17,10 @@ class Plans {
       return -1;
     }
     return a.date.getTime() - b.date.getTime();
+  }
+
+  static fromJSON(json: { plans: Plan[] }): Plans {
+    return new Plans(json.plans.map((plan) => Plan.fromJSON(plan)));
   }
 
   allDestinations(): Destination[] {
