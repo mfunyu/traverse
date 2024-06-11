@@ -3,6 +3,8 @@ import "../styles/components/MapMarker.scss";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { DestinationObject } from "../types/destination";
+import { useContext } from "react";
+import { PlansDispatchContext } from "./PlansContext";
 
 type Props = {
   dest: DestinationObject;
@@ -22,6 +24,11 @@ Icon.Default.mergeOptions({
 });
 
 function MarkerInRoute({ dest, index }: Props) {
+  const dispatch = useContext(PlansDispatchContext);
+
+  function handleDelete() {
+    dispatch({ type: "delete", newDest: dest });
+  }
 
   return (
     <div className="popup-item">
@@ -32,7 +39,7 @@ function MarkerInRoute({ dest, index }: Props) {
           <p>{dest.address}</p>
         </div>
       </div>
-      <button>x Remove from route</button>
+      <button onClick={handleDelete}>x Remove from route</button>
     </div>
   );
 }

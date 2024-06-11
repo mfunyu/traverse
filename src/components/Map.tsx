@@ -15,7 +15,7 @@ function Map() {
   const plans = useContext(PlansContext);
   const position: LatLngTuple = [51.505, -0.09];
   const allDests: DestinationObject[] = plans.allDestinations();
-  
+
   const [modalOpen, setModalOpen] = useState(false);
   const [latLng, setLatLng] = useState([0, 0]);
   const [label, setLabel] = useState("");
@@ -25,7 +25,7 @@ function Map() {
   }
 
   function handleAddLocation(x: number, y: number, label: string) {
-    setLatLng([x, y]);
+    setLatLng([y, x]);
     setLabel(label);
     setModalOpen(true);
   }

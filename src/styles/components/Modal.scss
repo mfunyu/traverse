@@ -87,6 +87,25 @@ $border-radius: 4px;
           background-color: darken(base.$primary-color, 10%);
         }
       }
+
+      .modal-button-delete {
+        @extend .modal-button;
+        background-color: base.$warning-color;
+
+        &:hover {
+          background-color: darken(base.$warning-color, 10%);
+        }
+      }
     }
+  }
+}
+
+.warning-modal {
+  @extend .modal;
+  .modal-content {
+    width: 20%;
+  }
+  .modal-footer {
+    margin: 0 1em;
   }
 }
