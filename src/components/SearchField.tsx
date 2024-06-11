@@ -12,7 +12,11 @@ const escapeHTML = (str: string) => {
     .replace(/'/g, "&#039;");
 };
 
-function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number, label: string) => void }){
+type SearchFieldProps = {
+  onAddLocation: (x: number, y: number, label: string) => void;
+};
+
+function SearchField ({ onAddLocation }: SearchFieldProps) {
   const provider = new OpenStreetMapProvider();
   const [marker, setMarker] = useState<L.Marker | null>(null);
 

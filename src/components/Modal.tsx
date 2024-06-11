@@ -14,8 +14,21 @@ type InputFieldProps = {
   value: string;
 }
 
-type Props = {
+type ModalProps = {
+  onClose: () => void;
+  displayData: Destination;
+  mode: "add" | "modify";
+  onDelete?: () => void;
+}
+
+type ModificationModalProps = {
   dest: Destination;
+  onClose: () => void;
+}
+
+type AddModalProps = {
+  latLng: number[];
+  label: string;
   onClose: () => void;
 }
 
@@ -34,13 +47,6 @@ function InputField({ onChange, value, label, placeholder, type, required = fals
       />
     </div>
   );
-}
-
-type ModalProps = {
-  onClose: () => void;
-  displayData: Destination;
-  mode: "add" | "modify";
-  onDelete?: () => void;
 }
 
 function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
@@ -151,13 +157,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   );
 }
 
-type Props1 = {
-  latLng: number[];
-  label: string;
-  onClose: () => void;
-}
-
-export function ModificationModal ({ dest, onClose }: Props) {
+export function ModificationModal ({ dest, onClose }: ModificationModalProps) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
@@ -169,7 +169,7 @@ export function ModificationModal ({ dest, onClose }: Props) {
   return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete}/>;
 }
 
-export function AddModal({ latLng, label, onClose }: Props1) {
+export function AddModal({ latLng, label, onClose }: AddModalProps) {
   const displayData = new Destination(label, latLng, "", new Date(), 0, "");
 
   return <Modal mode="add" onClose={onClose} displayData={displayData} />;

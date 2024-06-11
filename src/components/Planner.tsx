@@ -6,20 +6,20 @@ import { PlansContext } from "./PlansContext";
 import Plan from "../class/Plan";
 import { calcNdaysFromDate, isNotNextDay } from "../utils/dateUtils";
 
-type Props = {
+type PlannerProps = {
   plan: Plan;
   prevDate: Date;
   prevIndex: number;
 }
 
-function PlannerFiller({ plan, prevDate, prevIndex }: Props) {
+function PlannerFiller({ plan, prevDate, prevIndex }: PlannerProps) {
   const startDate = calcNdaysFromDate(prevDate, 1);
   const endDate = isNotNextDay(startDate, plan.date) ? calcNdaysFromDate(plan.date, -1) : null;
   const emptyPlan = new Plan(startDate, endDate, []);
   return <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
 }
 
-function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
+function PlannerCardDisplay({ plan, prevDate, prevIndex }: PlannerProps) {
   const isDisplayFiller = prevDate && isNotNextDay(prevDate, plan.date);
 
   return (

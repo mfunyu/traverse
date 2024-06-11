@@ -7,7 +7,7 @@ import { PlansDispatchContext } from "./PlansContext";
 import { PlansActionType } from "../reducer/PlansReducer";
 import Destination from "../class/Destination";
 
-type Props = {
+type MarkerProps = {
   dest: Destination;
   index: number;
 }
@@ -24,7 +24,7 @@ Icon.Default.mergeOptions({
   shadowUrl: "/images/marker-shadow.png",
 });
 
-function MarkerInRoute({ dest, index }: Props) {
+function MarkerInRoute({ dest, index }: MarkerProps) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
@@ -47,7 +47,7 @@ function MarkerInRoute({ dest, index }: Props) {
   );
 }
 
-function MapMarker({ dest, index }: Props) {
+function MapMarker({ dest, index }: MarkerProps) {
 
   return (
     <Marker position={dest.latLng} >

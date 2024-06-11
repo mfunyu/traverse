@@ -4,17 +4,17 @@ import Destination from "../class/Destination";
 import Plan from "../class/Plan";
 import { ModificationModal } from "./Modal";
 
-type Props = {
+type PlannerProps = {
   plan: Plan;
   index: number;
 }
 
-type ChildProps = {
+type ItemProps = {
   dest: Destination;
   index: number;
 }
 
-function PlannerItem ({ dest, index }: ChildProps) {
+function PlannerItem ({ dest, index }: ItemProps) {
   const [modalOpen, setModalOpen] = useState(false);
 
   function handleCloseModal() {
@@ -42,7 +42,7 @@ function getDateString (date: Date) {
   return date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long" });
 }
 
-function PlannerEmptyCard ({ plan, index }: Props) {
+function PlannerEmptyCard ({ plan }: PlannerProps) {
   const startDateString = getDateString(plan.date);
   const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
 
@@ -55,7 +55,7 @@ function PlannerEmptyCard ({ plan, index }: Props) {
   );
 }
 
-function PlannerStayCard ({ plan, index }: Props) {
+function PlannerStayCard ({ plan, index }: PlannerProps) {
   const startDateString = getDateString(plan.date);
   const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
 
@@ -70,7 +70,7 @@ function PlannerStayCard ({ plan, index }: Props) {
   );
 }
 
-function PlannerOneDayCard ({ plan, index }: Props) {
+function PlannerOneDayCard ({ plan, index }: PlannerProps) {
   const dateString = getDateString(plan.date);
 
   return (
@@ -83,7 +83,7 @@ function PlannerOneDayCard ({ plan, index }: Props) {
   );
 }
 
-function PlannerCard ({ plan, index }: Props) {
+function PlannerCard ({ plan, index }: PlannerProps) {
   if (plan.destinations.length === 0) {
     return <PlannerEmptyCard plan={plan} index={index}/>;
   }
