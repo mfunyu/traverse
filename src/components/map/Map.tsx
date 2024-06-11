@@ -1,15 +1,15 @@
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
-import "../styles/components/Map.scss";
+import "../../styles/components/Map.scss";
 import "leaflet/dist/leaflet.css";
 import SearchField from "./SearchField";
-import "../styles/components/SearchField.scss";
+import "../../styles/components/SearchField.scss";
 import { LatLngTuple } from "leaflet";
 import MapMarker from "./MapMarker";
-import "../styles/components/MapMarker.scss";
-import { AddModal } from "./Modal";
+import "../../styles/components/MapMarker.scss";
+import { AddModal } from "../modal/Modal";
 import { useContext, useState } from "react";
-import { PlansContext } from "./PlansContext";
-import Destination from "../class/Destination";
+import { PlansContext } from "../../context/PlansContext";
+import Destination from "../../class/Destination";
 
 function Map() {
   const plans = useContext(PlansContext);
@@ -34,7 +34,7 @@ function Map() {
 
   return (
     <>
-      {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal}/>}
+      {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal} />}
       <div className="map">
         <MapContainer
           center={position}
@@ -46,8 +46,8 @@ function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <ZoomControl position="bottomright" />
-          <SearchField onAddLocation={handleAddLocation}/>
-          {allDests.map((dest, index) => <MapMarker key={index} dest={dest} index={index + 1}/>)}
+          <SearchField onAddLocation={handleAddLocation} />
+          {allDests.map((dest, index) => <MapMarker key={index} dest={dest} index={index + 1} />)}
         </MapContainer>
       </div>
     </>

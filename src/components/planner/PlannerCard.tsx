@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "../styles/components/PlannerCard.scss";
-import Destination from "../class/Destination";
-import Plan from "../class/Plan";
-import { ModificationModal } from "./Modal";
+import "../../styles/components/PlannerCard.scss";
+import Destination from "../../class/Destination";
+import Plan from "../../class/Plan";
+import { ModificationModal } from "../modal/Modal";
 
 type PlannerProps = {
   plan: Plan;
@@ -14,7 +14,7 @@ type ItemProps = {
   index: number;
 }
 
-function PlannerItem ({ dest, index }: ItemProps) {
+function PlannerItem({ dest, index }: ItemProps) {
   const [modalOpen, setModalOpen] = useState(false);
 
   function handleCloseModal() {
@@ -38,11 +38,11 @@ function PlannerItem ({ dest, index }: ItemProps) {
   );
 }
 
-function getDateString (date: Date) {
+function getDateString(date: Date) {
   return date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "long" });
 }
 
-function PlannerEmptyCard ({ plan }: PlannerProps) {
+function PlannerEmptyCard({ plan }: PlannerProps) {
   const startDateString = getDateString(plan.date);
   const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
 
@@ -55,7 +55,7 @@ function PlannerEmptyCard ({ plan }: PlannerProps) {
   );
 }
 
-function PlannerStayCard ({ plan, index }: PlannerProps) {
+function PlannerStayCard({ plan, index }: PlannerProps) {
   const startDateString = getDateString(plan.date);
   const endDateString = getDateString(plan.endDate || new Date()); // endDate is never null, need to change the type
 
@@ -63,34 +63,34 @@ function PlannerStayCard ({ plan, index }: PlannerProps) {
     <div className="card-stay">
       <div className="tag">stay</div>
       <h3>{startDateString} - {endDateString}</h3>
-      <PlannerItem dest={plan.destinations[0]} index={index}/>
+      <PlannerItem dest={plan.destinations[0]} index={index} />
       <div className="item-body">
       </div>
     </div>
   );
 }
 
-function PlannerOneDayCard ({ plan, index }: PlannerProps) {
+function PlannerOneDayCard({ plan, index }: PlannerProps) {
   const dateString = getDateString(plan.date);
 
   return (
     <div className="card">
       <h3>{dateString}</h3>
-      {plan.destinations.length && plan.destinations.map((dest) => <PlannerItem dest={dest} key={index} index={index++}/>)}
+      {plan.destinations.length && plan.destinations.map((dest) => <PlannerItem dest={dest} key={index} index={index++} />)}
       <div className="item-body">
       </div>
     </div>
   );
 }
 
-function PlannerCard ({ plan, index }: PlannerProps) {
+function PlannerCard({ plan, index }: PlannerProps) {
   if (plan.destinations.length === 0) {
-    return <PlannerEmptyCard plan={plan} index={index}/>;
+    return <PlannerEmptyCard plan={plan} index={index} />;
   }
   if (plan.endDate) {
-    return <PlannerStayCard plan={plan} index={index}/>;
+    return <PlannerStayCard plan={plan} index={index} />;
   }
-  return <PlannerOneDayCard plan={plan} index={index}/>;
+  return <PlannerOneDayCard plan={plan} index={index} />;
 }
 
 export default PlannerCard;

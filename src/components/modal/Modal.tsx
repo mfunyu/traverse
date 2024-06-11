@@ -1,9 +1,9 @@
 import { ChangeEvent, useContext, useState } from "react";
-import Destination from "../class/Destination";
-import "../styles/components/Modal.scss";
-import { PlansContext, PlansDispatchContext } from "./PlansContext";
-import { getLocalDateString } from "../utils/dateUtils";
-import { PlansActionType } from "../reducer/PlansReducer";
+import Destination from "../../class/Destination";
+import "../../styles/components/Modal.scss";
+import { PlansContext, PlansDispatchContext } from "../../context/PlansContext";
+import { getLocalDateString } from "../../utils/dateUtils";
+import { PlansActionType } from "../../reducer/PlansReducer";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -157,7 +157,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   );
 }
 
-export function ModificationModal ({ dest, onClose }: ModificationModalProps) {
+export function ModificationModal({ dest, onClose }: ModificationModalProps) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
@@ -166,7 +166,7 @@ export function ModificationModal ({ dest, onClose }: ModificationModalProps) {
     dispatch({ type: PlansActionType.DELETE, newDest: dest });
     onClose();
   }
-  return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete}/>;
+  return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete} />;
 }
 
 export function AddModal({ latLng, label, onClose }: AddModalProps) {

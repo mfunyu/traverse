@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import "../styles/components/Planner.scss";
+import "../../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
-import { TripObject } from "../types/trip";
-import { PlansContext } from "./PlansContext";
-import Plan from "../class/Plan";
-import { calcNdaysFromDate, isNotNextDay } from "../utils/dateUtils";
+import { TripObject } from "../../types/trip";
+import { PlansContext } from "../../context/PlansContext";
+import Plan from "../../class/Plan";
+import { calcNdaysFromDate, isNotNextDay } from "../../utils/dateUtils";
 
 type PlannerProps = {
   plan: Plan;
@@ -30,7 +30,7 @@ function PlannerCardDisplay({ plan, prevDate, prevIndex }: PlannerProps) {
   );
 }
 
-function PlannerLists () {
+function PlannerLists() {
   const plans = useContext(PlansContext);
   if (!plans)
     throw new Error("PlansContext is not provided");

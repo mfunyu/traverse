@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import "../styles/components/NavigationBar.scss";
-import { PlansDispatchContext } from "./PlansContext";
-import WarningModal from "./WarningModal";
+import { PlansDispatchContext } from "../context/PlansContext";
+import WarningModal from "./modal/WarningModal";
 import { PlansActionType } from "../reducer/PlansReducer";
 
 function NavigationBar () {

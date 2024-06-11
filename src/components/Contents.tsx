@@ -1,8 +1,8 @@
 import { useEffect, useReducer } from "react";
 import { TripObject } from "../types/trip";
-import Map from "./Map";
-import Planner from "./Planner";
-import { PlansContext, PlansDispatchContext } from "./PlansContext";
+import Map from "./map/Map";
+import Planner from "./planner/Planner";
+import { PlansContext, PlansDispatchContext } from "../context/PlansContext";
 import NavigationBar from "./NavigationBar";
 import { plansReducer } from "../reducer/PlansReducer";
 import Plans from "../class/Plans";

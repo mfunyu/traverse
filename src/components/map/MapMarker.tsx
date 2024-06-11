@@ -1,11 +1,11 @@
 import { Marker, Popup } from "react-leaflet";
-import "../styles/components/MapMarker.scss";
+import "../../styles/components/MapMarker.scss";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { useContext } from "react";
-import { PlansDispatchContext } from "./PlansContext";
-import { PlansActionType } from "../reducer/PlansReducer";
-import Destination from "../class/Destination";
+import { PlansDispatchContext } from "../../context/PlansContext";
+import { PlansActionType } from "../../reducer/PlansReducer";
+import Destination from "../../class/Destination";
 
 type MarkerProps = {
   dest: Destination;
@@ -52,7 +52,7 @@ function MapMarker({ dest, index }: MarkerProps) {
   return (
     <Marker position={dest.latLng} >
       <Popup>
-        <MarkerInRoute dest={dest} index={index}/>
+        <MarkerInRoute dest={dest} index={index} />
       </Popup>
     </Marker>
   );
