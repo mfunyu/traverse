@@ -49,7 +49,7 @@ function SearchField ({ onAddLocation }: SearchFieldProps) {
     // Add an event listener for when a location is shown
     map.on("geosearch/showlocation", (e: any) => {
       // If there is an existing marker, remove it
-      if (marker) {
+      if (marker && map) {
         map.removeLayer(marker);
       }
       // Set the new marker
@@ -60,7 +60,7 @@ function SearchField ({ onAddLocation }: SearchFieldProps) {
     window.addLocation = (x: number, y: number, label:string) => {
       onAddLocation(x, y, label);
       // Remove the marker placed by GeoSearch
-      if (marker) {
+      if (marker && map) {
         map.removeLayer(marker);
         setMarker(null);
       }

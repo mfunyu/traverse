@@ -10,7 +10,7 @@ import { AddModal } from "../modal/Modal";
 import { useContext, useState } from "react";
 import { PlansContext } from "../../context/PlansContext";
 import Destination from "../../class/Destination";
-import Routing from "./Routing";
+import RoutingMachine from "./Routing";
 
 function Map() {
   const plans = useContext(PlansContext);
@@ -56,7 +56,8 @@ function Map() {
             prevLatLng = dest.latLng;
             if (index == 0)
               return null;
-            return <Routing key={index} from={saveLatLng} to={dest.latLng} />;
+            //@ts-ignore
+            return <RoutingMachine key={index} from={saveLatLng} to={dest.latLng} />;
           })}
         </MapContainer>
       </div>
