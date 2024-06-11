@@ -45,7 +45,7 @@ function PlannerLists () {
           const prevIndexSave = prevIndex;
           prevIndex += plan.destinations.length;
           const prevDateSave = prevDate;
-          prevDate = plan.endDate ? plan.endDate : plan.date;
+          prevDate = plan.endDate || plan.date;
           return <PlannerCardDisplay plan={plan} key={index} prevDate={prevDateSave} prevIndex={prevIndexSave} />;
         })}
       </div>

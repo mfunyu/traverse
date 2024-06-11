@@ -121,7 +121,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
           required={true} />
         <InputField
           onChange={(e) => setCustomName(e.target.value)}
-          value={customName ? customName : ""}
+          value={customName || ""}
           label="Custom name"
           placeholder="Lyon"
           type="text"
@@ -135,7 +135,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
           required={false} />
         <InputField
           onChange={(e) => setNotes(e.target.value)}
-          value={notes ? notes : ""}
+          value={notes || ""}
           label="Notes"
           placeholder="add notes"
           type="text"

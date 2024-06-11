@@ -30,7 +30,7 @@ function PlannerItem ({ dest, index }: ItemProps) {
       <div className="item" onClick={handleClick}>
         <div className="circle-number">{index}</div>
         <div className="details">
-          <h4>{dest.customLabel ? dest.customLabel : dest.label}</h4>
+          <h4>{dest.customLabel || dest.label}</h4>
           <p>{dest.address}</p>
         </div>
       </div>
@@ -87,7 +87,10 @@ function PlannerCard ({ plan, index }: PlannerProps) {
   if (plan.destinations.length === 0) {
     return <PlannerEmptyCard plan={plan} index={index}/>;
   }
-  return plan.endDate ? <PlannerStayCard plan={plan} index={index}/> : <PlannerOneDayCard plan={plan} index={index}/>;
+  if (plan.endDate) {
+    return <PlannerStayCard plan={plan} index={index}/>;
+  }
+  return <PlannerOneDayCard plan={plan} index={index}/>;
 }
 
 export default PlannerCard;
