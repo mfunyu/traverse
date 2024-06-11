@@ -32,6 +32,9 @@ function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
 
 function PlannerLists () {
   const plans = useContext(PlansContext);
+  if (!plans)
+    throw new Error("PlansContext is not provided");
+
   let prevIndex = 1;
   let prevDate: Date;
 

@@ -3,6 +3,7 @@ import Destination from "../class/Destination";
 import "../styles/components/Modal.scss";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
 import { getLocalDateString } from "../utils/dateUtils";
+import { PlansActionType } from "../reducer/PlansReducer";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -56,6 +57,9 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
 
   function handleSubmit() {
     console.log("submit");
+    if (!dispatch || !plans)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+
     if (!arrivalDate) {
       setShowError(true);
       setErrorMsg("Arrival date is required");
@@ -83,12 +87,12 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
     if (mode === "modify") {
       if (newDest.arrivalDate !== displayData.arrivalDate ||
         newDest.lengthOfStay !== displayData.lengthOfStay) {
-        dispatch({ type: "replace", newDest: newDest });
+        dispatch({ type: PlansActionType.REPLACE, newDest: newDest });
       } else {
-        dispatch({ type: "modify", newDest: newDest });
+        dispatch({ type: PlansActionType.MODIFY, newDest: newDest });
       }
     } else if (mode === "add") {
-      dispatch({ type: "add", newDest: newDest });
+      dispatch({ type: PlansActionType.ADD, newDest: newDest });
     }
     onClose();
   }
@@ -158,7 +162,9 @@ export function ModificationModal ({ dest, onClose }: Props) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
-    dispatch({ type: "delete", newDest: dest });
+    if (!dispatch)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+    dispatch({ type: PlansActionType.DELETE, newDest: dest });
     onClose();
   }
   return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete}/>;

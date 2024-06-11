@@ -2,12 +2,13 @@ import { Marker, Popup } from "react-leaflet";
 import "../styles/components/MapMarker.scss";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
-import { DestinationObject } from "../types/destination";
 import { useContext } from "react";
 import { PlansDispatchContext } from "./PlansContext";
+import { PlansActionType } from "../reducer/PlansReducer";
+import Destination from "../class/Destination";
 
 type Props = {
-  dest: DestinationObject;
+  dest: Destination;
   index: number;
 }
 
@@ -27,7 +28,9 @@ function MarkerInRoute({ dest, index }: Props) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
-    dispatch({ type: "delete", newDest: dest });
+    if (!dispatch)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+    dispatch({ type: PlansActionType.DELETE, newDest: dest });
   }
 
   return (
