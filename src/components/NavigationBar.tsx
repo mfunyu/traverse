@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import "../styles/components/NavigationBar.scss";
-import { PlansDispatchContext } from "./PlansContext";
-import WarningModal from "./WarningModal";
+import { PlansDispatchContext } from "../context/PlansContext";
+import WarningModal from "./modal/WarningModal";
+import { PlansActionType } from "../reducer/PlansReducer";
 
 function NavigationBar () {
   const dispatch = useContext(PlansDispatchContext);
@@ -16,7 +17,9 @@ function NavigationBar () {
   }
 
   function handleConfirm() {
-    dispatch({ type: "clear" });
+    if (!dispatch)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+    dispatch({ type: PlansActionType.CLEAR });
     setShowWarning(false);
   }
 

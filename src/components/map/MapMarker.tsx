@@ -1,13 +1,14 @@
 import { Marker, Popup } from "react-leaflet";
-import "../styles/components/MapMarker.scss";
+import "../../styles/components/MapMarker.scss";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
-import { DestinationObject } from "../types/destination";
 import { useContext } from "react";
-import { PlansDispatchContext } from "./PlansContext";
+import { PlansDispatchContext } from "../../context/PlansContext";
+import { PlansActionType } from "../../reducer/PlansReducer";
+import Destination from "../../class/Destination";
 
-type Props = {
-  dest: DestinationObject;
+type MarkerProps = {
+  dest: Destination;
   index: number;
 }
 
@@ -23,11 +24,13 @@ Icon.Default.mergeOptions({
   shadowUrl: "/images/marker-shadow.png",
 });
 
-function MarkerInRoute({ dest, index }: Props) {
+function MarkerInRoute({ dest, index }: MarkerProps) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
-    dispatch({ type: "delete", newDest: dest });
+    if (!dispatch)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+    dispatch({ type: PlansActionType.DELETE, newDest: dest });
   }
 
   return (
@@ -44,12 +47,12 @@ function MarkerInRoute({ dest, index }: Props) {
   );
 }
 
-function MapMarker({ dest, index }: Props) {
+function MapMarker({ dest, index }: MarkerProps) {
 
   return (
     <Marker position={dest.latLng} >
       <Popup>
-        <MarkerInRoute dest={dest} index={index}/>
+        <MarkerInRoute dest={dest} index={index} />
       </Popup>
     </Marker>
   );

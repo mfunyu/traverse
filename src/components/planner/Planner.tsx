@@ -1,25 +1,25 @@
 import React, { useContext } from "react";
-import "../styles/components/Planner.scss";
+import "../../styles/components/Planner.scss";
 import PlannerCard from "./PlannerCard";
-import { TripObject } from "../types/trip";
-import { PlansContext } from "./PlansContext";
-import Plan from "../class/Plan";
-import { calcNdaysFromDate, isNotNextDay } from "../utils/dateUtils";
+import { TripObject } from "../../types/trip";
+import { PlansContext } from "../../context/PlansContext";
+import Plan from "../../class/Plan";
+import { calcNdaysFromDate, isNotNextDay } from "../../utils/dateUtils";
 
-type Props = {
+type PlannerProps = {
   plan: Plan;
   prevDate: Date;
   prevIndex: number;
 }
 
-function PlannerFiller({ plan, prevDate, prevIndex }: Props) {
+function PlannerFiller({ plan, prevDate, prevIndex }: PlannerProps) {
   const startDate = calcNdaysFromDate(prevDate, 1);
   const endDate = isNotNextDay(startDate, plan.date) ? calcNdaysFromDate(plan.date, -1) : null;
   const emptyPlan = new Plan(startDate, endDate, []);
   return <PlannerCard plan={emptyPlan} key="empty" index={prevIndex} />;
 }
 
-function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
+function PlannerCardDisplay({ plan, prevDate, prevIndex }: PlannerProps) {
   const isDisplayFiller = prevDate && isNotNextDay(prevDate, plan.date);
 
   return (
@@ -30,8 +30,11 @@ function PlannerCardDisplay({ plan, prevDate, prevIndex }: Props) {
   );
 }
 
-function PlannerLists () {
+function PlannerLists() {
   const plans = useContext(PlansContext);
+  if (!plans)
+    throw new Error("PlansContext is not provided");
+
   let prevIndex = 1;
   let prevDate: Date;
 
@@ -42,7 +45,7 @@ function PlannerLists () {
           const prevIndexSave = prevIndex;
           prevIndex += plan.destinations.length;
           const prevDateSave = prevDate;
-          prevDate = plan.endDate ? plan.endDate : plan.date;
+          prevDate = plan.endDate || plan.date;
           return <PlannerCardDisplay plan={plan} key={index} prevDate={prevDateSave} prevIndex={prevIndexSave} />;
         })}
       </div>
@@ -52,7 +55,6 @@ function PlannerLists () {
 
 function Planner({ trip }: { trip: TripObject }) {
 
-  console.log("Planner.tsx: trip", trip);
   return (
     <>
       <div className="planner">

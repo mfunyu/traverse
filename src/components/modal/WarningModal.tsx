@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/components/Modal.scss";
+import "../../styles/components/Modal.scss";
 
 interface WarningModalProps {
   message: string;

@@ -1,8 +1,9 @@
 import { ChangeEvent, useContext, useState } from "react";
-import Destination from "../class/Destination";
-import "../styles/components/Modal.scss";
-import { PlansContext, PlansDispatchContext } from "./PlansContext";
-import { getLocalDateString } from "../utils/dateUtils";
+import Destination from "../../class/Destination";
+import "../../styles/components/Modal.scss";
+import { PlansContext, PlansDispatchContext } from "../../context/PlansContext";
+import { getLocalDateString } from "../../utils/dateUtils";
+import { PlansActionType } from "../../reducer/PlansReducer";
 
 type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -13,8 +14,21 @@ type InputFieldProps = {
   value: string;
 }
 
-type Props = {
+type ModalProps = {
+  onClose: () => void;
+  displayData: Destination;
+  mode: "add" | "modify";
+  onDelete?: () => void;
+}
+
+type ModificationModalProps = {
   dest: Destination;
+  onClose: () => void;
+}
+
+type AddModalProps = {
+  latLng: number[];
+  label: string;
   onClose: () => void;
 }
 
@@ -35,13 +49,6 @@ function InputField({ onChange, value, label, placeholder, type, required = fals
   );
 }
 
-type ModalProps = {
-  onClose: () => void;
-  displayData: Destination;
-  mode: "add" | "modify";
-  onDelete?: () => void;
-}
-
 function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   const dispatch = useContext(PlansDispatchContext);
   const plans = useContext(PlansContext);
@@ -55,7 +62,9 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   const [errorMsg, setErrorMsg] = useState("");
 
   function handleSubmit() {
-    console.log("submit");
+    if (!dispatch || !plans)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+
     if (!arrivalDate) {
       setShowError(true);
       setErrorMsg("Arrival date is required");
@@ -83,12 +92,12 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
     if (mode === "modify") {
       if (newDest.arrivalDate !== displayData.arrivalDate ||
         newDest.lengthOfStay !== displayData.lengthOfStay) {
-        dispatch({ type: "replace", newDest: newDest });
+        dispatch({ type: PlansActionType.REPLACE, newDest: newDest });
       } else {
-        dispatch({ type: "modify", newDest: newDest });
+        dispatch({ type: PlansActionType.MODIFY, newDest: newDest });
       }
     } else if (mode === "add") {
-      dispatch({ type: "add", newDest: newDest });
+      dispatch({ type: PlansActionType.ADD, newDest: newDest });
     }
     onClose();
   }
@@ -112,7 +121,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
           required={true} />
         <InputField
           onChange={(e) => setCustomName(e.target.value)}
-          value={customName ? customName : ""}
+          value={customName || ""}
           label="Custom name"
           placeholder="Lyon"
           type="text"
@@ -126,7 +135,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
           required={false} />
         <InputField
           onChange={(e) => setNotes(e.target.value)}
-          value={notes ? notes : ""}
+          value={notes || ""}
           label="Notes"
           placeholder="add notes"
           type="text"
@@ -148,23 +157,19 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   );
 }
 
-type Props1 = {
-  latLng: number[];
-  label: string;
-  onClose: () => void;
-}
-
-export function ModificationModal ({ dest, onClose }: Props) {
+export function ModificationModal({ dest, onClose }: ModificationModalProps) {
   const dispatch = useContext(PlansDispatchContext);
 
   function handleDelete() {
-    dispatch({ type: "delete", newDest: dest });
+    if (!dispatch)
+      throw new Error("usePlansDispatch must be used within a PlansProvider");
+    dispatch({ type: PlansActionType.DELETE, newDest: dest });
     onClose();
   }
-  return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete}/>;
+  return <Modal mode="modify" onClose={onClose} displayData={dest} onDelete={handleDelete} />;
 }
 
-export function AddModal({ latLng, label, onClose }: Props1) {
+export function AddModal({ latLng, label, onClose }: AddModalProps) {
   const displayData = new Destination(label, latLng, "", new Date(), 0, "");
 
   return <Modal mode="add" onClose={onClose} displayData={displayData} />;

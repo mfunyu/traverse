@@ -12,6 +12,10 @@ class Plan implements PlanObject {
     this.destinations = destinations;
   }
 
+  static fromJSON(json: PlanObject): Plan {
+    return new Plan(new Date(json.date), json.endDate ? new Date(json.endDate) : null, json.destinations.map((dest) => Destination.fromJSON(dest)));
+  }
+
   deepCopy(): Plan {
     const dateCopy = new Date(this.date);
     const endDateCopy = this.endDate ? new Date(this.endDate) : null;
