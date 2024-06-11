@@ -16,7 +16,6 @@ function Contents({ trip }: { trip: TripObject }) {
     const savedItinerary = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (savedItinerary) {
       const plans = Plans.fromJSON(JSON.parse(savedItinerary));
-      console.log("Saved Itinerary", plans);
       return plans;
     }
     return trip.plans;

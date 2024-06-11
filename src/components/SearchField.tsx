@@ -13,7 +13,6 @@ const escapeHTML = (str: string) => {
 };
 
 function SearchField ({ onAddLocation }: { onAddLocation: (x: number, y: number, label: string) => void }){
-  console.log("SearchField");
   const provider = new OpenStreetMapProvider();
   const [marker, setMarker] = useState<L.Marker | null>(null);
 

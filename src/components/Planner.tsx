@@ -55,7 +55,6 @@ function PlannerLists () {
 
 function Planner({ trip }: { trip: TripObject }) {
 
-  console.log("Planner.tsx: trip", trip);
   return (
     <>
       <div className="planner">

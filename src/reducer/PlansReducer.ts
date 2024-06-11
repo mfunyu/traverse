@@ -32,7 +32,6 @@ export function plansReducer(plans: Plans, action: PlansAction): Plans {
     return newPlans;
   case PlansActionType.REPLACE:
     newPlans.replaceDestination(action.newDest);
-    console.log(newPlans.allDestinations());
     return newPlans;
   case PlansActionType.DELETE:
     newPlans.deleteDestination(action.newDest.id);

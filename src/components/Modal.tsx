@@ -56,7 +56,6 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
   const [errorMsg, setErrorMsg] = useState("");
 
   function handleSubmit() {
-    console.log("submit");
     if (!dispatch || !plans)
       throw new Error("usePlansDispatch must be used within a PlansProvider");
 

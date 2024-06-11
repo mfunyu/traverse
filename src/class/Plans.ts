@@ -36,7 +36,6 @@ class Plans {
   isValidDate(date: Date, lengthOfStay: number, id: string): boolean {
     date.setHours(0, 0, 0);
     const endDate = lengthOfStay ? calcNdaysFromDate(date, lengthOfStay) : null;
-    console.log("Checking date", this.plans, date, endDate);
     for (const plan of this.plans) {
       const result = plan.checkPlan(date, endDate);
       if (result === "overlap") {
@@ -81,7 +80,6 @@ class Plans {
       endDate = calcNdaysFromDate(destination.arrivalDate, destination.lengthOfStay);
     }
     const plan = this.findPlanByDate(destination.arrivalDate, endDate);
-    console.log("Adding destination", this.plans);
     plan.destinations.push(destination);
   }
 
@@ -110,7 +108,6 @@ class Plans {
     if (emptyPlanIndex !== -1) {
       this.plans.splice(emptyPlanIndex, 1);
     }
-    console.log("Removed destination", this.plans);
   }
 
   replaceDestination(newDest: Destination) {
