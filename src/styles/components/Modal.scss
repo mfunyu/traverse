@@ -99,3 +99,13 @@ $border-radius: 4px;
     }
   }
 }
+
+.warning-modal {
+  @extend .modal;
+  .modal-content {
+    width: 20%;
+  }
+  .modal-footer {
+    margin: 0 1em;
+  }
+}

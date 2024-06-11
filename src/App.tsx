@@ -30,7 +30,6 @@ function App() {
 
   return (
     <div className="App">
-      <NavigationBar />
       <Contents trip={trips[0]} />
     </div>
   );

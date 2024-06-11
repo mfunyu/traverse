@@ -5,6 +5,7 @@ import Planner from "./Planner";
 import { PlansContext, PlansDispatchContext } from "./PlansContext";
 import Plans from "../class/Plans";
 import Destination from "../class/Destination";
+import NavigationBar from "./NavigationBar";
 
 
 function planReducer(plans: Plans, action: { type: string, newDest: Destination }) {
@@ -23,6 +24,9 @@ function planReducer(plans: Plans, action: { type: string, newDest: Destination 
   case "delete":
     newPlans.deleteDestination(action.newDest.id);
     return newPlans;
+  case "clear":
+    newPlans.clearPlans();
+    return newPlans;
   default:
     return plans;
   }
@@ -36,6 +40,7 @@ function Contents({ trip }: { trip: TripObject }) {
     <div>
       <PlansContext.Provider value={plans}>
         <PlansDispatchContext.Provider value={dispatch}>
+          <NavigationBar />
           <Planner trip={trip} />
           <Map />
         </PlansDispatchContext.Provider>

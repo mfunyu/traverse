@@ -112,6 +112,10 @@ class Plans {
     this.deleteDestination(newDest.id);
     this.addDestination(newDest);
   }
+
+  clearPlans() {
+    this.plans = [];
+  }
 }
 
 export default Plans;
