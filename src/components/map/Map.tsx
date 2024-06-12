@@ -57,7 +57,7 @@ function Map() {
             if (index == 0)
               return null;
             //@ts-ignore
-            return <RoutingMachine key={index} from={saveLatLng} to={dest.latLng} />;
+            return <RoutingMachine key={`${index}-${dest.latLng.toString()}`} from={saveLatLng} to={dest.latLng} />;
           })}
         </MapContainer>
       </div>
