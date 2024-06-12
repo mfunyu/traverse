@@ -6,7 +6,6 @@ function SetActiveArea() {
   const map = useMap();
 
   if (!isMobile) {
-    //@ts-ignore
     map.setActiveArea({
       position: "absolute",
       top: "58px",
@@ -15,7 +14,6 @@ function SetActiveArea() {
       height: "calc(100% - 58px)",
     });
   } else {
-    //@ts-ignore
     map.setActiveArea({
       position: "absolute",
       top: "100px",
