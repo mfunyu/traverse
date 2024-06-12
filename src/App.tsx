@@ -5,6 +5,7 @@ import Contents from "./components/Contents";
 import Destination from "./class/Destination";
 import Plans from "./class/Plans";
 import { calcNdaysFromDate } from "./utils/dateUtils";
+import Joyride, { Step } from "react-joyride";
 
 const initExampleData = () => {
   const now = new Date();
@@ -38,16 +39,32 @@ const initExampleData = () => {
 };
 
 function App() {
-
   const trips: TripObject[] = [{
     label: "Trip",
     plans: new Plans(initExampleData()),
   }];
 
+  const steps: Step[] = [
+    {
+      target: ".nav-buttons",
+      content: "You can clear all example destinations by clicking here!",
+    },
+  ];
+
   return (
-    <div className="App">
-      <Contents trip={trips[0]} />
-    </div>
+    <>
+      <Joyride
+        steps={steps}
+        styles={{
+          options: {
+            primaryColor: "#507DBC",
+          },
+        }}
+      />
+      <div className="App">
+        <Contents trip={trips[0]} />
+      </div>
+    </>
   );
 }
 
