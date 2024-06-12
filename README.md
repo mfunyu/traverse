@@ -5,6 +5,8 @@ Traverse is a web application that allows users to plan their road trips. <br/>
 By discovering and selecting destinations, setting arrival dates, and deciding on the length of stay, users can craft their own personalized journeys. <br/>
 They can seamlessly edit or remove stops, and the itinerary is beautifully organized with an interactive map view, providing an enhanced visual experience.
 
+![Demo Video](Traverse.mp4)
+
 ## How to use
 1. **Example Destinations**: Example destinations are shown, and you can clear them using the clear button at the top left.
 2. **Search Destinations**: Search for your destination using the search bar.
