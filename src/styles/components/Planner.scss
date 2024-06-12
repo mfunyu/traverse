@@ -3,8 +3,6 @@
 .planner {
   width: 420px;
   height: calc(100vh - 58px); /* 100% height minus header */
-  overflow-y: clip;
-  overflow: hidden;
   z-index: 2;
   position: absolute;
 
@@ -33,6 +31,31 @@
       flex: 1;
       overflow-y: auto;
       padding: 1em;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .planner {
+    position: fixed;
+    width: 100%;
+    height: 50%;
+    top: 50%;
+    margin: 0;
+    padding: 0;
+
+    .contents {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      min-height: auto;
+      border-radius: 0;
+      /* Remove rounded corners for full-width */
+
+      .header {
+        border-radius: 0;
+        padding: 0.5em;
+        /* Remove rounded corners for full-width */
+      }
     }
   }
 }
