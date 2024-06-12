@@ -1,13 +1,11 @@
 @use '../base';
 
-$border-radius: 4px;
-
 .card {
-  background-color: base.$secondary-color;
+  background-color: base.$light-background-color;
   color: base.$text-color;
   padding: 1em;
   margin-bottom: 1em;
-  border-radius: $border-radius;
+  border-radius: base.$border-radius;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   h3 {
     text-align: left;
@@ -20,19 +18,19 @@ $border-radius: 4px;
     border: solid;
     padding: 0.5em;
     border-width: 0 0 1px 0;
-    border-color: base.$primary-color;
+    border-color: base.$background-color-hover;
     margin: -1px;
 
     &:hover {
-      background-color: base.$primary-color;
-      border-radius: $border-radius;
+      background-color: base.$background-color-hover;
+      border-radius: base.$border-radius;
     }
 
     .circle-number {
       width: 30px;
       height: 30px;
       padding-top: 5px;
-      border: 1px solid black;
+      border: 1px solid base.$text-color;
       border-radius: 50%;
       text-align: center;
       box-sizing: border-box;
@@ -67,8 +65,8 @@ $border-radius: 4px;
     top: 0;
     right: 0;
     padding: 2px 2px 7px 7px;
-    border-radius: 0 0 0 $border-radius;
+    border-radius: 0 0 0 base.$border-radius;
     background-color: base.$accent-color;
-    color: base.$secondary-color;
+    color: base.$light-background-color;
   }
 }

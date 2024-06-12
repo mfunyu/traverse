@@ -47,6 +47,7 @@ function SearchField ({ onAddLocation }: SearchFieldProps) {
     map.addControl(searchControl as L.Control);
 
     // Add an event listener for when a location is shown
+    // eslint-disable-next-line
     map.on("geosearch/showlocation", (e: any) => {
       // If there is an existing marker, remove it
       if (marker && map) {

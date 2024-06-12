@@ -1,5 +1,4 @@
 @use '../base';
-$border-radius: 4px;
 
 .popup-item {
 
@@ -11,7 +10,7 @@ $border-radius: 4px;
       width: 30px;
       height: 30px;
       padding-top: 5px;
-      border: 1px solid black;
+      border: 1px solid base.$text-color;
       border-radius: 50%;
       text-align: center;
       box-sizing: border-box;
@@ -33,15 +32,16 @@ $border-radius: 4px;
     }
   }
 
-  $background-color: base.$primary-color;
+  $background-color: base.$background-color;
+
   button {
     width: 100%;
     padding: 0.75em 1.5em;
     font-weight: bold;
-    color: base.$secondary-color;
+    color: base.$light-text-color;
     background-color: $background-color;
     border: none;
-    border-radius: $border-radius;
+    border-radius: base.$border-radius;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
@@ -56,15 +56,11 @@ $border-radius: 4px;
 
     &:active {
       background-color: darken($background-color, 20%);
-    }
 
-    &.disabled {
-      background-color: lighten($background-color, 30%);
-      cursor: not-allowed;
-      opacity: 0.6;
     }
-  }
+    }
 }
+
 .custom-popup-item {
   @extend .popup-item;
   display: flex;
@@ -77,6 +73,7 @@ $border-radius: 4px;
 
   button {
     background-color: $background-color;
+    color: base.$light-text-color;
 
     &:hover {
       background-color: darken($background-color, 10%);

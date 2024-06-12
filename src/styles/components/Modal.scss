@@ -1,10 +1,9 @@
 @use '../base';
 
-$border-radius: 4px;
 .modal {
   display: block;
   position: fixed;
-  z-index: 20;
+  z-index: 3;
   left: 0;
   top: 0;
   width: 100%;
@@ -13,16 +12,16 @@ $border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.4);
 
   .modal-content {
-    background-color: base.$secondary-color;
+    background-color: base.$light-background-color;
     margin: 15% auto;
     padding: 20px;
     width: 30%;
     min-width: 350px;
     max-width: 700px;
-    border-radius: $border-radius;
+    border-radius: base.$border-radius;
 
     .close-button {
-      color: #aaa;
+      color: base.$background-color;
       float: right;
       font-weight: bold;
       font-size: 35px;
@@ -66,7 +65,7 @@ $border-radius: 4px;
       margin: 1em;
       padding: 0.5em;
       border: 1px solid base.$warning-color;
-      border-radius: $border-radius;
+      border-radius: base.$border-radius;
       background-color: rgba(255, 0, 0, 0.1);
     }
 
@@ -75,16 +74,16 @@ $border-radius: 4px;
       justify-content: space-between;
 
       .modal-button {
-        background-color: base.$primary-color;
-        color: base.$secondary-color;
+        background-color: base.$background-color;
+          color: base.$light-background-color;
         padding: 14px 20px;
         margin: 8px 0;
         border: none;
-        border-radius: $border-radius;
+        border-radius: base.$border-radius;
         cursor: pointer;
 
         &:hover {
-          background-color: darken(base.$primary-color, 10%);
+          background-color: darken(base.$background-color, 10%);
         }
       }
 
@@ -93,7 +92,7 @@ $border-radius: 4px;
         background-color: base.$warning-color;
 
         &:hover {
-          background-color: darken(base.$warning-color, 10%);
+          background-color: lighten(base.$warning-color, 5%);
         }
       }
     }

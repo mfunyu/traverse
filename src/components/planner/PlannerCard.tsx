@@ -31,7 +31,7 @@ function PlannerItem({ dest, index }: ItemProps) {
         <div className="circle-number">{index}</div>
         <div className="details">
           <h4>{dest.customLabel || dest.label}</h4>
-          <p>{dest.address}</p>
+          <p>{dest.notes || dest.address}</p>
         </div>
       </div>
     </>
