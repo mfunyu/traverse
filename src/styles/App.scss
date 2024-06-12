@@ -1,5 +1,7 @@
+@use 'base';
 .App {
   text-align: center;
+  color: base.$text-color;
   position: relative;
 
   @media (prefers-reduced-motion: no-preference) {

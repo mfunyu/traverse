@@ -22,7 +22,7 @@ $border-radius: 4px;
     border-radius: $border-radius;
 
     .close-button {
-      color: #aaa;
+      color: base.$background-color2;
       float: right;
       font-weight: bold;
       font-size: 35px;
@@ -93,7 +93,7 @@ $border-radius: 4px;
         background-color: base.$warning-color;
 
         &:hover {
-          background-color: darken(base.$warning-color, 10%);
+          background-color: lighten(base.$warning-color, 5%);
         }
       }
     }

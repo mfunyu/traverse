@@ -11,7 +11,7 @@
   z-index: 10;
 
   .brand {
-    color: base.$light-background-color;
+    color: base.$brand-color;
     font-size: 28px;
     font-weight: bold;
     font-family: cursive;
@@ -22,7 +22,7 @@
 
     button {
       background-color: base.$light-background-color2;
-      color: base.$light-background-color;
+      color: base.$warning-color;
       border: none;
       border-radius: 4px;
       padding: 10px 20px;
