@@ -1,3 +1,5 @@
+[README (en)](README.md) • [Subject (fr)](SUBJECT.md) • [Design Doc (en)](DESIGN.md)
+
 # [Design Document]: Traverse (road trip planning App
 
 ## 🗺️ Overview
