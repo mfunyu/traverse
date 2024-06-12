@@ -2,10 +2,13 @@
 image: node:lts
 # Functions that should be executed before the build script is run
 before_script:
-  - npm ci
+  - CI=false npm install
 pages:
   script:
-    - npm run build
+    - CI=false npm run build
+    - rm -rf public
+    - cp build/index.html build/404.html
+    - mv build public
   artifacts:
     paths:
       # The folder that contains the files to be exposed at the Page URL
