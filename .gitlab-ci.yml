@@ -2,7 +2,7 @@
 image: node:lts
 # Functions that should be executed before the build script is run
 before_script:
-  - CI=false npm install
+  - CI=false npm install --legacy-peer-deps
 pages:
   script:
     - CI=false npm run build
