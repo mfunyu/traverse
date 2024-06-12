@@ -123,7 +123,7 @@ function Modal({ onClose, displayData, mode, onDelete }: ModalProps) {
           onChange={(e) => setCustomName(e.target.value)}
           value={customName || ""}
           label="Custom name"
-          placeholder="Lyon"
+          placeholder="optional"
           type="text"
           required={false} />
         <InputField
