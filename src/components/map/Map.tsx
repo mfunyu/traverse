@@ -13,11 +13,13 @@ import Destination from "../../class/Destination";
 import RoutingMachine from "./Routing";
 import SetActiveArea from "./SetActiveArea";
 
+const CoordinateLyon: LatLngTuple = [45.75, 4.85];
+
 function Map() {
   const plans = useContext(PlansContext);
   if (!plans)
     throw new Error("PlansContext is not provided");
-  const position: LatLngTuple = [51.505, -0.09];
+  const position: LatLngTuple = CoordinateLyon;
   const allDests: Destination[] = plans.allDestinations();
 
   const [modalOpen, setModalOpen] = useState(false);
