@@ -5,7 +5,7 @@
   height: calc(100vh - 58px); /* 100% height minus header */
   overflow-y: clip;
   overflow: hidden;
-  z-index: 9;
+  z-index: 2;
   position: absolute;
 
   .contents {
@@ -21,6 +21,7 @@
 
     .header {
       position: sticky;
+      color: base.$light-text-color;
       top: 0;
       z-index: 1;
       padding: 1em;
