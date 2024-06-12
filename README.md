@@ -1,9 +1,15 @@
 [README (en)](README.md) • [Subject (fr)](SUBJECT.md) • [Design Doc (en)](DESIGN.md)
 
+[![wakatime](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/dc98b7d5-070f-4fa5-a9d5-acb8be66c640.svg)](https://wakatime.com/badge/user/08071e9d-f227-4ac4-acb0-e78a5829cf60/project/dc98b7d5-070f-4fa5-a9d5-acb8be66c640)
+
 # ⛰️Traverse: road trip planner
 Traverse is a web application that allows users to plan their road trips. <br/>
 By discovering and selecting destinations, setting arrival dates, and deciding on the length of stay, users can craft their own personalized journeys. <br/>
 They can seamlessly edit or remove stops, and the itinerary is beautifully organized with an interactive map view, providing an enhanced visual experience.
+
+## 🚀 Deployed Project
+
+**Check out the deployed project here: [Traverse -Road Trip Planner-](https://road-trip-app-mfunyu-38981952388dc62e79f35638ccdb213b3c3fd12231.gitlab.io/)**
 
 ![Demo Video](Traverse.mp4)
 
