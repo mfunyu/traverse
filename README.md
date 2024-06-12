@@ -14,22 +14,6 @@ They can seamlessly edit or remove stops, and the itinerary is beautifully organ
 4. **Modify Destinations**: Modify your trip by clicking on a destination, making the necessary changes, and clicking save to apply the updates.
 5. **Delete Destinations**: To delete a destination, click the delete button in the modification window or select "remove from route" in the map popup.
 
-
-### Search Destinations
-Search for your destination using the search bar.
-
-### Add Destinations
-Add the destination to your trip by specifying the arrival date. You can also add additional information as desired.
-
-### Modify Destinations
-Modify your trip by clicking on a destination, making the necessary changes, and clicking save to apply the updates.
-
-### Delete Destinations
-To delete a destination, click the delete button in the modification window or select "remove from route" in the map popup.
-
-
-
-
 ## Installation
 
 ### Prerequisites
