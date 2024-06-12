@@ -10,6 +10,8 @@ import { AddModal } from "../modal/Modal";
 import { useContext, useState } from "react";
 import { PlansContext } from "../../context/PlansContext";
 import Destination from "../../class/Destination";
+import RoutingMachine from "./Routing";
+import SetActiveArea from "./SetActiveArea";
 
 function Map() {
   const plans = useContext(PlansContext);
@@ -32,6 +34,8 @@ function Map() {
     setModalOpen(true);
   }
 
+  let prevLatLng: LatLngTuple = [0, 0];
+
   return (
     <>
       {modalOpen && <AddModal latLng={latLng} label={label} onClose={handleCloseModal} />}
@@ -46,8 +50,17 @@ function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <ZoomControl position="bottomright" />
+          <SetActiveArea />
           <SearchField onAddLocation={handleAddLocation} />
           {allDests.map((dest, index) => <MapMarker key={index} dest={dest} index={index + 1} />)}
+          {allDests.map((dest, index) => {
+            const saveLatLng = prevLatLng;
+            prevLatLng = dest.latLng;
+            if (index == 0)
+              return null;
+            //@ts-ignore
+            return <RoutingMachine key={`${index}-${dest.latLng.toString()}`} from={saveLatLng} to={dest.latLng} />;
+          })}
         </MapContainer>
       </div>
     </>
