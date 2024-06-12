@@ -7,3 +7,20 @@ $bar-size: calc((100% - 420px) * 0.5);
   padding: 3em;
   width: $bar-size;
 }
+@media (max-width: 768px) {
+  .leaflet-control-container {
+    display: flex;
+    /* Ensure the parent takes the full height of the viewport */
+
+    .leaflet-geosearch-bar {
+      position: absolute;
+      top: 50px;
+      right: 10%;
+      left: 10%;
+      width: 80%;
+      min-width: 250px;
+      padding: 2em;
+      box-sizing: border-box;
+    }
+  }
+}
