@@ -6,6 +6,7 @@ import Destination from "./class/Destination";
 import Plans from "./class/Plans";
 import { calcNdaysFromDate } from "./utils/dateUtils";
 import Joyride, { Step } from "react-joyride";
+import { useEffect, useState } from "react";
 
 const initExampleData = () => {
   const now = new Date();
@@ -38,11 +39,15 @@ const initExampleData = () => {
   return exampleData;
 };
 
+
+
 function App() {
   const trips: TripObject[] = [{
     label: "Trip",
     plans: new Plans(initExampleData()),
   }];
+  const [showTutorial, setShowTutorial] = useState(true);
+
 
   const steps: Step[] = [
     {
@@ -51,16 +56,25 @@ function App() {
     },
   ];
 
+  const LOCAL_STORAGE_KEY = "road_trip_tutorial";
+
+  useEffect(() => {
+    const done = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (done)
+      setShowTutorial(false);
+  }, []);
+
   return (
     <>
-      <Joyride
+      {showTutorial && <Joyride
         steps={steps}
         styles={{
           options: {
             primaryColor: "#507DBC",
           },
         }}
-      />
+        callback={() => localStorage.setItem(LOCAL_STORAGE_KEY, "done")}
+      />}
       <div className="App">
         <Contents trip={trips[0]} />
       </div>
