@@ -20,3 +20,35 @@ Traverse is a web application that allows users to plan their road trips. By add
 ### Steps
 1. Clone the repository:
    ```bash
+   git clone https://gitlab.com/mfunyu/traverse.git
+   ```
+
+2. Start docker container:
+   ```
+   make
+   ```
+
+3. Connect from a browser
+   https://localhost:3000
+
+## Technos
+
+### Basics
+
+- **React**: [React Documentation](https://react.dev/reference/react)
+- **TypeScript**: [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- **HTML**: [HTML Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- **CSS (Sass)**: [Sass Documentation](https://sass-lang.com/documentation)
+- **Docker**: [Docker Documentation](https://docs.docker.com/)
+
+### Additional Libraries
+
+| Technology                | Description                                                                                 | Documentation Link                                 |
+|---------------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------|
+| **React-Leaflet**         | A React wrapper for Leaflet, a JavaScript library for interactive maps.                     | [React-Leaflet Documentation](https://react-leaflet.js.org/)  |
+| **Leaflet-Geosearch**     | A geocoding library for Leaflet, allowing for location searches and display on maps.         | [Leaflet-Geosearch Documentation](https://github.com/smeijer/leaflet-geosearch) |
+| **Leaflet-Routing-Machine** | A routing library for Leaflet, providing a way to draw routes on a map and control them easily.      | [Leaflet Routing Machine Documentation](http://www.liedman.net/leaflet-routing-machine/) |
+| **Leaflet-Active-Area**   | A Leaflet plugin that defines the active area of the map, where layers are displayed and interactive. | [Leaflet-Active-Area Documentation](https://github.com/Mappy/Leaflet-active-area) |
+| **UUID**                  | A library for generating unique identifiers (UUIDs) in JavaScript.                          | [UUID Documentation](https://github.com/uuidjs/uuid) |
+
+
