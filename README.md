@@ -1,9 +1,9 @@
 [README (en)](README.md) • [Subject (fr)](SUBJECT.md) • [Design Doc (en)](DESIGN.md)
 
-# Traverse: road trip planner
-
-## Overview
-Traverse is a web application that allows users to plan their road trips. By adding destinations, specifying arrival dates, and setting the number of days to stay user can plan their own trip. Users can also modify or delete destinations, and the itinerary is displayed in an organized manner with a map view for better visualization.
+# ⛰️Traverse: road trip planner
+Traverse is a web application that allows users to plan their road trips. <br/>
+By discovering and selecting destinations, setting arrival dates, and deciding on the length of stay, users can craft their own personalized journeys. <br/>
+They can seamlessly edit or remove stops, and the itinerary is beautifully organized with an interactive map view, providing an enhanced visual experience.
 
 ## Features
 - **Add Destination**: Users can add new destinations with details like name, arrival date, number of days to stay, and notes.
@@ -25,13 +25,12 @@ Traverse is a web application that allows users to plan their road trips. By add
    git clone https://gitlab.com/mfunyu/traverse.git
    ```
 
-2. Start docker container:
+2. Start the docker container:
    ```
    make
    ```
 
-3. Connect from a browser
-   https://localhost:3000
+3. Access from a browser: https://localhost:3000
 
 ## Technos
 
