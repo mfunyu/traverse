@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: base.$primary-color;
+  background-color: base.$background-color2;
   padding: 10px 20px;
   position: sticky;
   top: 0;
@@ -21,7 +21,7 @@
     display: flex;
 
     button {
-      background-color: base.$secondary-color;
+      background-color: base.$light-background-color2;
       color: base.$light-background-color;
       border: none;
       border-radius: 4px;
@@ -31,7 +31,7 @@
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken(base.$secondary-color, 10%);
+        background-color: darken(base.$light-background-color2, 10%);
       }
     }
   }

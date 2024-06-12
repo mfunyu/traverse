@@ -3,7 +3,7 @@
 $border-radius: 4px;
 
 .card {
-  background-color: base.$secondary-color;
+  background-color: base.$light-background-color2;
   color: base.$text-color;
   padding: 1em;
   margin-bottom: 1em;
@@ -20,11 +20,11 @@ $border-radius: 4px;
     border: solid;
     padding: 0.5em;
     border-width: 0 0 1px 0;
-    border-color: base.$primary-color;
+    border-color: base.$background-color2;
     margin: -1px;
 
     &:hover {
-      background-color: base.$primary-color;
+      background-color: base.$background-color2;
       border-radius: $border-radius;
     }
 
@@ -69,6 +69,6 @@ $border-radius: 4px;
     padding: 2px 2px 7px 7px;
     border-radius: 0 0 0 $border-radius;
     background-color: base.$accent-color;
-    color: base.$secondary-color;
+    color: base.$light-background-color2;
   }
 }

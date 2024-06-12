@@ -33,12 +33,12 @@ $border-radius: 4px;
     }
   }
 
-  $background-color: base.$primary-color;
+        $background-color: base.$background-color2;
   button {
     width: 100%;
     padding: 0.75em 1.5em;
     font-weight: bold;
-    color: base.$secondary-color;
+    color: base.$light-background-color2;
     background-color: $background-color;
     border: none;
     border-radius: $border-radius;

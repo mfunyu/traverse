@@ -13,7 +13,7 @@ $border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.4);
 
   .modal-content {
-    background-color: base.$secondary-color;
+    background-color: base.$light-background-color2;
     margin: 15% auto;
     padding: 20px;
     width: 30%;
@@ -75,8 +75,8 @@ $border-radius: 4px;
       justify-content: space-between;
 
       .modal-button {
-        background-color: base.$primary-color;
-        color: base.$secondary-color;
+        background-color: base.$background-color2;
+          color: base.$light-background-color2;
         padding: 14px 20px;
         margin: 8px 0;
         border: none;
@@ -84,7 +84,7 @@ $border-radius: 4px;
         cursor: pointer;
 
         &:hover {
-          background-color: darken(base.$primary-color, 10%);
+          background-color: darken(base.$background-color2, 10%);
         }
       }
 
