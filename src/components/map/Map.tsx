@@ -11,6 +11,7 @@ import { useContext, useState } from "react";
 import { PlansContext } from "../../context/PlansContext";
 import Destination from "../../class/Destination";
 import RoutingMachine from "./Routing";
+import SetActiveArea from "./SetActiveArea";
 
 function Map() {
   const plans = useContext(PlansContext);
@@ -49,6 +50,7 @@ function Map() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <ZoomControl position="bottomright" />
+          <SetActiveArea />
           <SearchField onAddLocation={handleAddLocation} />
           {allDests.map((dest, index) => <MapMarker key={index} dest={dest} index={index + 1} />)}
           {allDests.map((dest, index) => {

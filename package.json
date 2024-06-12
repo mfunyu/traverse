@@ -12,6 +12,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "leaflet": "^1.9.4",
+    "leaflet-active-area": "^1.2.1",
     "leaflet-control-geocoder": "^2.4.0",
     "leaflet-geosearch": "^4.0.0",
     "leaflet-routing-machine": "^3.2.12",
